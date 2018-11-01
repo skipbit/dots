@@ -1,0 +1,3 @@
+
+export LV="-c -l"
+

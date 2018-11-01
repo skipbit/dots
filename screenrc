@@ -1,0 +1,34 @@
+
+# 起動メッセージをオフ
+startup_message off
+
+# 回線が切断された時など自動的に detach する
+autodetach on
+
+# UTF-8 モードにする (% screen -U)
+defencoding utf-8
+encoding utf-8 utf-8
+setenv LANG ja_JP.UTF-8
+
+# エスケープキーを変更 a -> z
+escape ^z^z
+
+# ステータスバーを表示
+hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
+
+# キャプションバーを常に表示
+#caption always "%{= wb} %-w%{=bu dr}%n %t%{-}%+w"
+
+# 一定時間操作されない時に screen blanker
+#idle 3600
+#blankerprg /usr/bin/fortune
+
+# 設定再読み込みキーバインド
+bind ^r source $HOME/.screenrc
+
+# z の代わりに新たに suspend するキーバインド
+bind ^a suspend
+
+# a の代わりに新たに title するキーバインド
+bind ^t title
+

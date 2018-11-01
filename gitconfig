@@ -1,0 +1,68 @@
+
+[core]
+	excludesfile = /Users/endo/.gitexcludes
+	quotepath = false
+
+[user]
+	name = Yuma Endo
+	email = endo@skipbit.jp
+
+[color]
+	status	= auto
+	diff	= auto
+	branch	= auto
+	grep	= auto
+	interactive	= auto
+
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	ls = ls-files
+
+	l  = log --abbrev-commit --graph --color --pretty=format:'%x09%C(yellow)[%ad]%Creset %C(magenta)<%h>%Creset %C(green)%d%Creset%n %x09%x09: %s'
+	la = log --abbrev-commit --graph --color --pretty=format:'%x09%C(yellow)[%ad]%Creset %C(magenta)<%h>%Creset %C(green)%d%Creset%n %x09%x09: %s' --all
+	log-all = log --graph --all --color --pretty='%x09%h %cn%x09%s %Cred%d%Creset'
+	last = log -1 HEAD
+
+	stat = status -sb
+	pp = pull --prune
+	alias = config --get-regexp \"alias.*\"
+
+	prestage = diff -w --word-diff=color
+	unstage = reset -q HEAD -- 
+	precommit = diff --cached --diff-algorithm=minimal -w
+	save = commit -m
+	resave = commit --amend
+	uncommit = reset --mixed HEAD~
+	discard = checkout --
+	nevermind = !git reset --hard && git clean -df
+	rewrite = rebase -i
+	unmerged = diff --name-only --diff-filter=U
+	what = show -w
+
+	branches = branch -a
+	tags = tag
+	remotes = remote -v
+	contributors = shortlog -s -n
+
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[pager]
+    branch = false
+    tag = false
+
+[commit]
+	template = /Users/endo/.stCommitMsg

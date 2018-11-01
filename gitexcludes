@@ -1,0 +1,76 @@
+
+# Finder
+.DS_Store
+.AppleDouble
+.LSOverride
+.VolumeIcon.icns
+.fseventsd
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Xcode
+build/
+DerivedData/
+xcuserdata/
+
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+
+*.pbxuser
+!default.pbxuser
+*.perspective
+*.perspectivev3
+!default.perspectivev3
+*.mode1
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+
+*.xccheckout
+*.xcscmblueprint
+*.xcuserstate
+*.moved-aside
+
+# InterfaceBuilder
+*~.nib
+
+# Another SCM
+.hg
+.svn
+CVS
+
+# Common UNIX Tools
+*.o
+*.swp
+*.swo
+
+# cocoapods
+Pods/
+
+# carthage
+Carthage/Build
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Qt: https://github.com/github/gitignore/blob/master/Qt.gitignore
+.qmake.cache
+.qmake.stash
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.pbs.user.*
+*.moc
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+# QtCreator
+*.autosave
+
