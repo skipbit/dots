@@ -18,3 +18,10 @@ for _config in "${config[@]}"; do
     zappload "${_config}"
 done
 
+# Dropbox
+if [ -e "${HOME}/.dropbox/info.json" ]; then
+    if type jq > /dev/null 2>&1; then
+        export DROPBOX_HOME="$(jq -r .personal.path "${HOME}/.dropbox/info.json")"
+    fi
+fi
+
