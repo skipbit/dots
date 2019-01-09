@@ -24,7 +24,7 @@ function zspecload() {
 function zappload() {
 	local name="${1}"
 	if [ ! -z ${name} ]; then
-        local folders=(core "$(uname | tr '[:upper:]' '[:lower:]')" "$(hostname -s)")
+        local folders=(core "$(uname -s | tr '[:upper:]' '[:lower:]')" "$(hostname -s)")
 		for folder in "${folders[@]}"; do
             if [ -d "${ZDOTDIR}/apps/${folder}" ]; then
     			source "${ZDOTDIR}/apps/${folder}/${name}.zsh"
