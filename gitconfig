@@ -26,6 +26,8 @@
 	log-all = log --graph --all --color --pretty='%x09%h %cn%x09%s %Cred%d%Creset'
 	last = log -1 HEAD
 
+	vd = difftool --tool=vimdiff --no-prompt
+
 	stat = status -sb
 	pp = pull --prune
 	alias = config --get-regexp \"alias.*\"
