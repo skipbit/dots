@@ -79,6 +79,9 @@ set smartcase                 " 大文字を含んでいたら区別するよう
 set hlsearch                  " 結果をハイライト
 " esc x 2 でハイライト切り替え (普通に消す場合は :noh)
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+" 選択部分を * で検索 (# で後方検索)
+vnoremap * "zy:let @/ = @z<CR>n
+vnoremap # "zy:let @/ = @z<CR>N
 
 syntax enable
 colorscheme desert
