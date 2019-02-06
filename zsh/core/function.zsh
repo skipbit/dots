@@ -59,14 +59,14 @@ function chkinstall() {
 function lowercase() {
 	local str="${1}"
 	if [ ! -z "${str}" ]; then
-		echo "${str}" | tr '[:upper:]' '[:lower:]'
+		tr '[:upper:]' '[:lower:]' <<< "${str}"
 	fi
 }
 
 function uppercase() {
 	local str="${1}"
 	if [ ! -z "${str}" ]; then
-		echo "${str}" | tr '[:lower:]' '[:upper:]'
+		tr '[:lower:]' '[:upper:]' <<< "${str}"
 	fi
 }
 
@@ -87,5 +87,19 @@ function tmpspace() {
 	fi
 	popd >/dev/null 2>&1
 	return $s
+}
+
+# <http://auewe.hatenablog.com/entry/2016/12/03/001000>
+function vipe() {
+    local cmd="${*}"
+    if [ -p /dev/stdin ]; then
+        if [ -n "${cmd}" ]; then
+            vim -es +'norm 1G' +"norm ${cmd}" +%p +q! /dev/stdin
+        else
+            vim - 
+        fi
+    else
+        vim "${cmd}"
+    fi
 }
 
