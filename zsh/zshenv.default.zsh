@@ -20,6 +20,9 @@ typeset -xT SUDO_PATH sudo_path
 typeset -U sudo_path
 sudo_path=({,/usr/local,/usr}/sbin(N-/))
 
+#
+typeset -UxT PKG_CONFIG_PATH pkg_config_path
+pkg_config_path=(/usr/lib/pkgconfig(N-/) /usr/local/lib/pkgconfig(N-/))
 
 # initialize platforms and host specified environment settings.
 if [ -f ${ZDOTDIR}/core/init.zsh ]; then
