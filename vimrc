@@ -53,6 +53,7 @@ set showmatch                 " 閉じカッコに対応するカッコを表示
 set showmode                  " 現在のモード表示
 set wildmenu                  " コマンドモードの補完 (tab)
 set foldmethod=marker         " 折りたたみ方法
+set nowrap
 
 " EDITING
 set modeline                  " モードラインを有効にする
@@ -71,6 +72,9 @@ augroup GenericFileTypeIndent
   autocmd BufNewFile,BufRead,FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
   autocmd BufNewFile,BufRead,FileType json setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
+
+" w!! で強制sudo保存
+cnoremap w!! w !sudo tee > /dev/null %<CR>
 
 " SEARCHING
 set incsearch                 " インクリメンタルサーチ (入力中に検索を開始する)
