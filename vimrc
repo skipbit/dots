@@ -76,6 +76,10 @@ augroup END
 " w!! で強制sudo保存
 cnoremap w!! w !sudo tee > /dev/null %<CR>
 
+" cpp/h ファイル名上で gf -> 開く / gs -> 水平分割で開く / gv -> 垂直分割で開く
+nnoremap gs <C-w>f<CR>
+nnoremap gv :vertical wincmd f<CR>
+
 " SEARCHING
 set incsearch                 " インクリメンタルサーチ (入力中に検索を開始する)
 set ignorecase                " 検索パターンに大文字小文字を区別しない
