@@ -25,7 +25,12 @@ call dein#add('vim-jp/vimdoc-ja')
 call dein#add('editorconfig/editorconfig-vim')
 
 " languages
+call dein#add('vim-jp/cpp-vim')
 call dein#add('leafgarland/typescript-vim')
+
+" tools/file
+call dein#add('scrooloose/nerdtree')
+map <C-l> :NERDTreeToggle<CR>
 
 call dein#end()
 filetype plugin indent on     " filetype plugin (filetype 毎に固有の設定) を有効にする
@@ -53,7 +58,7 @@ set showmatch                 " 閉じカッコに対応するカッコを表示
 set showmode                  " 現在のモード表示
 set wildmenu                  " コマンドモードの補完 (tab)
 set foldmethod=marker         " 折りたたみ方法
-set nowrap
+set nowrap                    " 折り返ししない
 
 " EDITING
 set modeline                  " モードラインを有効にする
