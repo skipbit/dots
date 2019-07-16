@@ -45,6 +45,8 @@ set fileformats=unix,mac,dos  " 改行コードの自動判別
 "set ambiwidth=double          " ○/ □が崩れ問題対策
 set nobackup                  " backup ファイルなし
 set noswapfile                " swap ファイルなし
+set splitbelow                " 水平分割は下に開く
+set splitright                " 垂直分割は右に開く
 
 " VIEWING
 "set title                    " ウィンドウタイトルの設定
