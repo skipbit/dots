@@ -66,5 +66,15 @@
     branch = false
     tag = false
 
-[commit]
-	template = /Users/endo/.stCommitMsg
+[diff]
+    tool = vimdiff
+
+[difftool]
+    prompt = false
+
+[merge]
+    tool = vimdiff
+
+[mergetool]
+    prompt = false
+
