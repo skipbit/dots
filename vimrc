@@ -124,7 +124,9 @@ if !exists(":DiffOrig")
 endif
 
 " templates
-" autocmd BufNewFile *.py 0r $HOME/.vim/templates/skel.py
-autocmd BufNewFile,BufRead *.py if getfsize(@%) <= 0 | 0r $HOME/.vim/templates/skel.py | endif
-autocmd BufNewFile,BufRead *.erb if getfsize(@%) <= 0 | 0r $HOME/.vim/templates/skel.erb | endif
+augroup GnenericFileTypeTemplate
+  " autocmd BufNewFile *.py 0r $HOME/.vim/templates/skel.py
+  autocmd BufNewFile,BufRead *.py if getfsize(@%) <= 0 | 0r $HOME/.vim/templates/skel.py | endif
+  autocmd BufNewFile,BufRead *.erb if getfsize(@%) <= 0 | 0r $HOME/.vim/templates/skel.erb | endif
+augroup END
 
