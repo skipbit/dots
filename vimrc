@@ -26,6 +26,7 @@ call dein#add('editorconfig/editorconfig-vim')
 
 " languages
 call dein#add('vim-jp/cpp-vim')
+call dein#add('vim-scripts/a.vim')
 call dein#add('leafgarland/typescript-vim')
 
 " tools/file
@@ -85,6 +86,13 @@ augroup END
 " COMPLETION
 set dictionary=/usr/share/dict/words  " 辞書を指定 (CTRL-X CTRL-K)
 
+if filereadable(".tags")
+  set tags+=.tags
+endif
+if filereadable(expand("~/.qt-tags"))
+  set tags+=~/.qt-tags
+endif
+
 " w!! で強制sudo保存
 cnoremap w!! w !sudo tee > /dev/null %<CR>
 
@@ -102,6 +110,12 @@ nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 " 選択部分を * で検索 (# で後方検索)
 vnoremap * "zy:let @/ = @z<CR>n
 vnoremap # "zy:let @/ = @z<CR>N
+" \g で カーソル下の単語を git repository の登録ファイル内から検索 (vimgrep + quickfix) -> \G なら case-sensitive
+nnoremap <leader>g :vimgrep /<C-r><C-w>\c/gj `git ls-files --recurse-submodule` <Bar>cwindow<CR>
+nnoremap <leader>G :vimgrep /<C-r><C-w>\C/gj `git ls-files --recurse-submodule` <Bar>cwindow<CR>
+" \g で 選択中の単語を git repository の登録ファイル内から検索 (vimgrep + quickfix) -> \G なら case-sensitive
+vnoremap <leader>g "zy:vimgrep /<C-r>z\c/gj `git ls-files --recurse-submodule` <Bar>cwindow<CR>
+vnoremap <leader>G "zy:vimgrep /<C-r>z\C/gj `git ls-files --recurse-submodule` <Bar>cwindow<CR>
 
 syntax enable
 colorscheme desert
