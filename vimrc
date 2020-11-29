@@ -83,6 +83,13 @@ augroup GenericFileTypeIndent
   autocmd BufNewFile,BufRead,FileType json setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
+" w!! で強制sudo保存
+cnoremap w!! w !sudo tee > /dev/null %<CR>
+
+" cpp/h ファイル名上で gf -> 開く / gs -> 水平分割で開く / gv -> 垂直分割で開く
+nnoremap gs <C-w>f<CR>
+nnoremap gv :vertical wincmd f<CR>
+
 " COMPLETION
 set dictionary=/usr/share/dict/words  " 辞書を指定 (CTRL-X CTRL-K)
 
@@ -92,13 +99,6 @@ endif
 if filereadable(expand("~/.qt-tags"))
   set tags+=~/.qt-tags
 endif
-
-" w!! で強制sudo保存
-cnoremap w!! w !sudo tee > /dev/null %<CR>
-
-" cpp/h ファイル名上で gf -> 開く / gs -> 水平分割で開く / gv -> 垂直分割で開く
-nnoremap gs <C-w>f<CR>
-nnoremap gv :vertical wincmd f<CR>
 
 " SEARCHING
 set incsearch                 " インクリメンタルサーチ (入力中に検索を開始する)
