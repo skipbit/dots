@@ -26,10 +26,12 @@ uninstall-zsh:
 install-git:
 	@ln -s $(SOURCE)/gitconfig  $(DESTINATION)/.gitconfig
 	@ln -s $(SOURCE)/gitexcludes $(DESTINATION)/.gitexcludes
+	@ln -s $(SOURCE)/tigrc $(DESTINATION)/.tigrc
 
 uninstall-git:
 	@mv $(DESTINATION)/.gitconfig $(DESTINATION)/.cleanup/
 	@mv $(DESTINATION)/.gitexcludes $(DESTINATION)/.cleanup/
+	@mv $(DESTINATION)/.tigrc $(DESTINATION)/.cleanup/
 
 install-vim:
 	@ln -s $(SOURCE)/exrc $(DESTINATION)/.exrc

@@ -1,0 +1,14 @@
+# https://github.com/jonas/tig/blob/master/tigrc
+
+# view-settings
+set main-view = id:yes date:default author:full commit-title:graph=yes,refs=yes
+set refs-view = id:yes date:default author:full ref commit-title
+set tree-view = mode author:full file-size date:default id:yes file-name
+
+# key-bindings
+bind generic D  !git difftool --tool=vimdiff --no-prompt --trust-exit-code %(commit)^!
+bind generic F  !git fetch --prune --tags
+
+# bind branch P   !git push origin %(branch)
+# bind branch L   !git pull origin %(branch)
+
