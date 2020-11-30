@@ -27,12 +27,27 @@ call dein#add('editorconfig/editorconfig-vim')
 " languages
 call dein#add('vim-jp/cpp-vim')
 call dein#add('vim-scripts/a.vim')
-call dein#add('leafgarland/typescript-vim')
 
-" tools/file
+" tools/explorer
 call dein#add('scrooloose/nerdtree')
-map <C-l> :NERDTreeToggle<CR>
-map <C-n> :NERDTreeFind<CR>
+nnoremap <C-l> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeFind<CR>
+
+" tools/scm
+if executable('tig')
+  call dein#add('iberianpig/tig-explorer.vim')
+  "nnoremap <leader>t :vert term ++close tig<CR>
+  "nnoremap <leader>T :term ++curwin ++close tig<CR>
+  "nnoremap <leader>h :vert term ++close tig -- %<CR>
+  "nnoremap <leader>H :term ++curwin ++close tig -- %<CR>
+
+  nnoremap <leader>tp :TigOpenProjectRootDir<CR>
+  nnoremap <leader>th :TigOpenCurrentFile<CR>
+  nnoremap <leader>tg :TigGrep<CR>
+  vnoremap <leader>tg "zy:TigGrep<Space><C-r>z<CR>
+  nnoremap <leader>tr :TigGrepResume<CR>
+  nnoremap <leader>tb :TigBlame<CR>
+endif
 
 call dein#end()
 filetype plugin indent on     " filetype plugin (filetype 毎に固有の設定) を有効にする
@@ -93,10 +108,10 @@ nnoremap gv :vertical wincmd f<CR>
 " COMPLETION
 set dictionary=/usr/share/dict/words  " 辞書を指定 (CTRL-X CTRL-K)
 
-if filereadable(".tags")
+if filereadable('.tags')
   set tags+=.tags
 endif
-if filereadable(expand("~/.qt-tags"))
+if filereadable(expand('~/.qt-tags'))
   set tags+=~/.qt-tags
 endif
 
@@ -142,5 +157,10 @@ augroup GnenericFileTypeTemplate
   " autocmd BufNewFile *.py 0r $HOME/.vim/templates/skel.py
   autocmd BufNewFile,BufRead *.py if getfsize(@%) <= 0 | 0r $HOME/.vim/templates/skel.py | endif
   autocmd BufNewFile,BufRead *.erb if getfsize(@%) <= 0 | 0r $HOME/.vim/templates/skel.erb | endif
+augroup END
+
+" developer tools support
+augroup GenericDevelopment
+  autocmd QuickfixCmdPost make,grep,grepadd,vimgrep cwindow
 augroup END
 
