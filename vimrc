@@ -33,14 +33,29 @@ call dein#add('scrooloose/nerdtree')
 nnoremap <C-l> :NERDTreeToggle<CR>
 nnoremap <C-n> :NERDTreeFind<CR>
 
+if executable('fzf')
+  call dein#add('junegunn/fzf', {'build': './install --all'})
+  call dein#add('junegunn/fzf.vim')
+  let g:fzf_action = {'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit'}
+  nnoremap <leader>zf :GFiles --recurse-submodule<CR> " リポジトリファイル名検索
+  nnoremap <leader>zF :Files<CR>                      " ローカルファイル名検索
+  nnoremap <leader>zb :Buffers<CR>                    " 全バッファ名一覧検索
+  nnoremap <leader>zB :Windows<CR>                    " 表示中のバッファ名検索
+  nnoremap <leader>zl :BLines<CR>                     " カレントバッファ行検索
+  nnoremap <leader>zL :Lines<CR>                      " 全バッファ行検索
+  nnoremap <leader>zh :History<CR>                    " ファイル履歴検索
+  nnoremap <leader>zc :History:<CR>                   " コマンド履歴検索
+  nnoremap <leader>z/ :History/<CR>                   " 検索履歴検索
+  nnoremap <leader>zg :BCommits<CR>                   " commit log search (current buffer)
+  nnoremap <leader>zG :Commits<CR>                    " commit log search (whole project)
+  nnoremap <leader>zm :Maps<CR>                       " vim map search
+  nnoremap <leader>zt :BTags<CR>                      " ctags (current buffer) search
+  nnoremap <leader>zT :Tags<CR>                       " ctags (whole project) search
+endif
+
 " tools/scm
 if executable('tig')
   call dein#add('iberianpig/tig-explorer.vim')
-  "nnoremap <leader>t :vert term ++close tig<CR>
-  "nnoremap <leader>T :term ++curwin ++close tig<CR>
-  "nnoremap <leader>h :vert term ++close tig -- %<CR>
-  "nnoremap <leader>H :term ++curwin ++close tig -- %<CR>
-
   nnoremap <leader>tp :TigOpenProjectRootDir<CR>
   nnoremap <leader>th :TigOpenCurrentFile<CR>
   nnoremap <leader>tg :TigGrep<CR>
@@ -48,6 +63,14 @@ if executable('tig')
   nnoremap <leader>tr :TigGrepResume<CR>
   nnoremap <leader>tb :TigBlame<CR>
   nnoremap <leader>ts :TigStatus<CR>
+
+  " nnoremap <leader>t<C-p>s <C-w><C-s>:TigOpenProjectRootDir<CR>
+  " nnoremap <leader>t<C-p>v <C-w><C-v>:TigOpenProjectRootDir<CR>
+
+  nnoremap <leader>t<C-p>s :term ++close tig<CR>
+  nnoremap <leader>t<C-p>v :vert term ++close tig<CR>
+  nnoremap <leader>t<C-h>s :term ++close tig -- %<CR>
+  nnoremap <leader>t<C-h>v :vert term ++close tig -- %<CR>
 endif
 
 call dein#end()
@@ -110,11 +133,49 @@ nnoremap gv :vertical wincmd f<CR>
 " COMPLETION
 set dictionary=/usr/share/dict/words  " 辞書を指定 (CTRL-X CTRL-K)
 
-if filereadable('.tags')
-  set tags+=.tags
+if has('ctags')
+  if filereadable('.tags')
+    set tags+=.tags
+  endif
+  if filereadable(expand('~/.qt-tags'))
+    set tags+=~/.qt-tags
+  endif
 endif
-if filereadable(expand('~/.qt-tags'))
-  set tags+=~/.qt-tags
+
+if executable('cscope')
+  if filereadable('.scope')
+    cs add .scope
+  endif
+  " CTRL + _ (shift + -)
+  nnoremap <C-_>s :cs find s  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-_>g :cs find g  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-_>d :cs find d  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-_>c :cs find c  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-_>t :cs find t  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-_>e :cs find e  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-_>f :cs find f  <C-r>=expand('<cfile>')<CR><CR>
+  nnoremap <C-_>i :cs find i ^<C-r>=expand('<cfile>')<CR><CR>
+  nnoremap <C-_>a :cs find a  <C-r>=expand('<cword>')<CR><CR>
+  " CTRL + @ = horizontal split cscope
+  nnoremap <C-@>s :scs find s  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@>g :scs find g  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@>d :scs find d  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@>c :scs find c  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@>t :scs find t  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@>e :scs find e  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@>f :scs find f  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@>i :scs find i ^<C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@>a :scs find a  <C-r>=expand('<cword>')<CR><CR>
+  " CTRL + @ x 2 = vertical split cscope
+  nnoremap <C-@><C-@>s :vert scs find s  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@><C-@>g :vert scs find g  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@><C-@>d :vert scs find d  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@><C-@>c :vert scs find c  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@><C-@>t :vert scs find t  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@><C-@>e :vert scs find e  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@><C-@>f :vert scs find f  <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@><C-@>i :vert scs find i ^<C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-@><C-@>a :vert scs find a  <C-r>=expand('<cword>')<CR><CR>
 endif
 
 " SEARCHING
