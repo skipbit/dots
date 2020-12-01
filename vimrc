@@ -47,6 +47,7 @@ if executable('tig')
   vnoremap <leader>tg "zy:TigGrep<Space><C-r>z<CR>
   nnoremap <leader>tr :TigGrepResume<CR>
   nnoremap <leader>tb :TigBlame<CR>
+  nnoremap <leader>ts :TigStatus<CR>
 endif
 
 call dein#end()
@@ -64,6 +65,7 @@ set nobackup                  " backup ファイルなし
 set noswapfile                " swap ファイルなし
 set splitbelow                " 水平分割は下に開く
 set splitright                " 垂直分割は右に開く
+set history=1024              " 履歴を 1024 件保存する
 
 " VIEWING
 "set title                    " ウィンドウタイトルの設定
