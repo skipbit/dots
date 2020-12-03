@@ -139,7 +139,7 @@ nnoremap gv :vertical wincmd f<CR>
 " COMPLETION
 set dictionary=/usr/share/dict/words  " 辞書を指定 (CTRL-X CTRL-K)
 
-if has('ctags')
+if executable('ctags')
   if filereadable('.tags')
     set tags+=.tags
   endif
@@ -148,7 +148,7 @@ if has('ctags')
   endif
 endif
 
-if executable('cscope')
+if has('cscope') && executable('cscope')
   if filereadable('.scope')
     cs add .scope
   endif
