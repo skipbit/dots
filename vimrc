@@ -73,13 +73,10 @@ if executable('tig')
   nnoremap <leader>tb :TigBlame<CR>
   nnoremap <leader>ts :TigStatus<CR>
 
-  " nnoremap <leader>t<C-p>s <C-w><C-s>:TigOpenProjectRootDir<CR>
-  " nnoremap <leader>t<C-p>v <C-w><C-v>:TigOpenProjectRootDir<CR>
-
-  nnoremap <leader>t<C-p>s :term ++close tig<CR>
-  nnoremap <leader>t<C-p>v :vert term ++close tig<CR>
-  nnoremap <leader>t<C-h>s :term ++close tig -- %<CR>
-  nnoremap <leader>t<C-h>v :vert term ++close tig -- %<CR>
+  nnoremap <leader>t-s :term ++close tig status<CR>
+  nnoremap <leader>t-S :term ++close tig -- %<CR>
+  nnoremap <leader>t-v :vert term ++close tig status<CR>
+  nnoremap <leader>t-V :vert term ++close tig -- %<CR>
 endif
 
 call dein#end()
