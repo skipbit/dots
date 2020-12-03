@@ -28,13 +28,22 @@ call dein#add('editorconfig/editorconfig-vim')
 call dein#add('vim-jp/cpp-vim')
 call dein#add('vim-scripts/a.vim')
 
-" tools/explorer
+" tools/explorer (nerdtree)
 call dein#add('scrooloose/nerdtree')
 nnoremap <C-l> :NERDTreeToggle<CR>
 nnoremap <C-n> :NERDTreeFind<CR>
 
+" tools/explorer (fzf)
 if executable('fzf')
-  call dein#add('junegunn/fzf', {'build': './install --all'})
+  for s:fzf_home in ['~/.fzf', '$HOMEBREW_PREFIX/opt/fzf']
+    if exists('s:fzf_home')
+      " execute 'set runtimepath+=' . expand(s:fzf_home)
+      let &runtimepath .= ',' . expand(s:fzf_home)
+      nnoremap <leader><C-f> :FZF<CR>
+      break
+    endif
+  endfor
+
   call dein#add('junegunn/fzf.vim')
   let g:fzf_action = {'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit'}
   nnoremap <leader>zf :GFiles --recurse-submodule<CR> " リポジトリファイル名検索
