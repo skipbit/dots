@@ -46,20 +46,24 @@ if executable('fzf')
 
   call dein#add('junegunn/fzf.vim')
   let g:fzf_action = {'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit'}
-  nnoremap <leader>zf :GFiles --recurse-submodule<CR> " リポジトリファイル名検索
-  nnoremap <leader>zF :Files<CR>                      " ローカルファイル名検索
-  nnoremap <leader>zb :Buffers<CR>                    " 全バッファ名一覧検索
-  nnoremap <leader>zB :Windows<CR>                    " 表示中のバッファ名検索
-  nnoremap <leader>zl :BLines<CR>                     " カレントバッファ行検索
-  nnoremap <leader>zL :Lines<CR>                      " 全バッファ行検索
-  nnoremap <leader>zh :History<CR>                    " ファイル履歴検索
-  nnoremap <leader>zc :History:<CR>                   " コマンド履歴検索
-  nnoremap <leader>z/ :History/<CR>                   " 検索履歴検索
-  nnoremap <leader>zg :BCommits<CR>                   " commit log search (current buffer)
-  nnoremap <leader>zG :Commits<CR>                    " commit log search (whole project)
-  nnoremap <leader>zm :Maps<CR>                       " vim map search
-  nnoremap <leader>zt :BTags<CR>                      " ctags (current buffer) search
-  nnoremap <leader>zT :Tags<CR>                       " ctags (whole project) search
+  nnoremap <leader>zf :GFiles --recurse-submodule<CR>
+  nnoremap <leader>zF :Files<CR>
+  nnoremap <leader>zb :Buffers<CR>
+  nnoremap <leader>zB :Windows<CR>
+  nnoremap <leader>zl :BLines<CR>
+  nnoremap <leader>zL :Lines<CR>
+  nnoremap <leader>zh :History<CR>
+  nnoremap <leader>zc :History:<CR>
+  nnoremap <leader>z/ :History/<CR>
+  nnoremap <leader>zg :BCommits<CR>
+  nnoremap <leader>zG :Commits<CR>
+  nnoremap <leader>zm :Maps<CR>
+  nnoremap <leader>zt :BTags<CR>
+  nnoremap <leader>zT :Tags<CR>
+
+  nnoremap <silent> g<C-]> :call fzf#vim#tags(expand('<cword>'))<CR>
+  " nnoremap <silent> g<C-[> :call fzf#run(fzf#wrap({'source': 'cscope -f .scope -L -3 ' . expand('<cword>') . ' $(git ls-files --recurse-submodule)'}))<CR>
+  " command! -bang -nargs=? -complete=dir BLines call fzf#vim#buffer_lines(<q-args>, fzf#vim#with_preview(), <bang>0)
 endif
 
 " tools/scm
@@ -229,6 +233,11 @@ augroup GnenericFileTypeTemplate
 augroup END
 
 " developer tools support
+"" augroup GenericDebugger
+""   packadd termdebug
+""   let g:termdebug_wide = 1
+""   let termdebugger = 'lldb'
+"" augroup END
 augroup GenericDevelopment
   autocmd QuickfixCmdPost make,grep,grepadd,vimgrep cwindow
 augroup END
