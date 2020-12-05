@@ -1,8 +1,6 @@
 
-# Evaluate path_helper (prevent /etc/zprofile in 10.11/elcapitan)
-if [ "$(sw_vers | grep 'ProductVersion' | awk '{ print $2 }' | cut -d . -f -2)" = "10.11" ]; then
-	[ -x /usr/libexec/path_helper ] && eval `/usr/libexec/path_helper -s`
-fi
+# Evaluate path_helper (prevent /etc/zprofile in 10.11/elcapitan and later)
+[ -x /usr/libexec/path_helper ] && eval `/usr/libexec/path_helper -s`
 
 # Developer Tools
 if [ -x "/usr/bin/xcode-select" ]; then
