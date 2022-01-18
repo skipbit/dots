@@ -27,6 +27,7 @@ call dein#add('editorconfig/editorconfig-vim')
 " languages
 call dein#add('vim-jp/cpp-vim')
 call dein#add('vim-scripts/a.vim')
+call dein#add('peterhoeg/vim-qml')
 
 " tools/explorer (nerdtree)
 call dein#add('scrooloose/nerdtree')
