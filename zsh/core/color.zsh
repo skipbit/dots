@@ -17,7 +17,9 @@ LS_COLORS="$LS_COLORS:*.mid=35:*.MID=35:*.rcp=35:*.RCP=35:*.mp3=35"
 LS_COLORS="$LS_COLORS:*.mod=35:*.MOD=35:*.au=35:*.aiff=35:*.wav=35"
 LS_COLORS="$LS_COLORS:*.htm=33:*.html=33:*.java=33:*.class=33:*.shtml=33"
 LS_COLORS="$LS_COLORS:*.php=33:*.phps=33:*.cdml=33:*.css=33:*.dat=33"
-LS_COLORS="$LS_COLORS:*.c=33:*.h=33:*.C=33:*.c++=33:*.cp=33:*.cpp=33:*.hp=33:*.hpp=33:*.m=33:*.mm=33"
+LS_COLORS="$LS_COLORS:*.c=33:*.h=33:*.C=33:*.c++=33:*.cp=33:*.cpp=33:*.hp=33:*.hpp=33"
+LS_COLORS="$LS_COLORS:*.m=33:*.mm=33"
+LS_COLORS="$LS_COLORS:*.cu=33"
 LS_COLORS="$LS_COLORS:*.tex=33:*~=0"
 
 export LS_COLORS
