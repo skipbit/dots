@@ -44,7 +44,7 @@ zspecload compctl
 zspecload function
 zspecload module
 
-_resources=(screen)
+_resources=(screen fzf)
 for _rc in "${_resources[@]}"; do
 	_conf="${ZDOTDIR}/apps/universal/${_rc}.zsh"
 	if [ -f "${_conf}" ]; then
