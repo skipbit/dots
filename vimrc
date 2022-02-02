@@ -47,6 +47,7 @@ if executable('fzf')
 
   call dein#add('junegunn/fzf.vim')
   let g:fzf_action = {'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit'}
+  nnoremap <leader>zz :GFiles?<CR>
   nnoremap <leader>zf :GFiles --recurse-submodule<CR>
   nnoremap <leader>zF :Files<CR>
   nnoremap <leader>zb :Buffers<CR>
