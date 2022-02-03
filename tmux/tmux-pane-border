@@ -1,0 +1,44 @@
+#!/bin/bash
+
+if git_status="$(cd "${1}" && git status 2>/dev/null)"; then
+    #git_repository="$(cd "${1}" && basename "$(git rev-parse --show-toplevel)")"
+
+    git_remote="$(cd "${1}" && git config --get remote.origin.url)"
+    git_repository="${git_remote#*github.com?}"
+    git_identifier="${git_repository%*.git}"
+
+    if [[ "${git_status}" =~ "detached" ]]; then
+        git_branch="$(echo "${git_status}" | awk 'NR==1 {print $4}')"
+    else
+        git_branch="$(echo "${git_status}" | awk 'NR==1 {print $3}')"
+    fi
+    case "${git_status}" in
+        *Changes\ not\ staged* )
+            #state="#[bg=colour009,fg=white] ± #[fg=default]"
+            state=" ± "
+            ;;
+        *Changes\ to\ be\ committed* )
+            #state="#[bg=colour190,fg=black] + #[default]"
+            state=" + "
+            ;;
+        *Untracked\ files* )
+            #state="#[bg=colour227,fg=black] ? #[default]"
+            state=" ? "
+            ;;
+        * )
+            #state="#[bg=colour006,fg=black] ✔ #[default]"
+            #state=" ✔ "
+            state=" - "
+            ;;
+    esac
+    git_info="#[bg=black,fg=colour014] [${git_branch}] #[default]${state}"
+
+    #directory="#[underscore]#[bg=black,fg=cyan]$1#[default]"
+    #echo "${directory}${git_info}"
+    #echo "${git_identifier} [${git_branch}]${git_info}"
+
+    echo "${git_identifier} [${git_branch}]${state}"
+else
+    echo ""
+fi
+
