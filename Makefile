@@ -7,6 +7,7 @@ install:
 	@make install-git
 	@make install-vim
 	@make install-screen
+	@make install-tmux
 
 clean:
 	@mkdir $(DESTINATION)/.cleanup
@@ -14,6 +15,7 @@ clean:
 	@make uninstall-git
 	@make uninstall-vim
 	@make uninstall-screen
+	@make uninstall-tmux
 
 install-zsh:
 	@[ ! -e $(DESTINATION)/.zsh ] && ln -s $(SOURCE)/zsh $(DESTINATION)/.zsh
@@ -49,4 +51,13 @@ install-screen:
 
 uninstall-screen:
 	@mv $(DESTINATION)/.screenrc $(DESTINATION)/.cleanup/
+
+install-tmux:
+	@ln -s $(SOURCE)/tmux/tmux.conf $(DESTINATION)/.tmux.conf
+	@mkdir -p $(DESTINATION)/.tmux/bin
+	@ln -s $(SOURCE)/tmux/tmux-pane-border $(DESTINATION)/.tmux/bin/tmux-pane-border
+
+uninstall-tmux:
+	@mv $(DESTINATION)/.tmux.conf $(DESTINATION)/.cleanup/
+	@mv $(DESTINATION)/.tmux $(DESTINATION)/.cleanup/
 
