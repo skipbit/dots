@@ -56,6 +56,7 @@ install-tmux:
 	@ln -s $(SOURCE)/tmux/tmux.conf $(DESTINATION)/.tmux.conf
 	@mkdir -p $(DESTINATION)/.tmux/bin
 	@ln -s $(SOURCE)/tmux/tmux-pane-border $(DESTINATION)/.tmux/bin/tmux-pane-border
+	@git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 uninstall-tmux:
 	@mv $(DESTINATION)/.tmux.conf $(DESTINATION)/.cleanup/
