@@ -37,7 +37,7 @@ nnoremap <C-n> :NERDTreeFind<CR>
 " tools/explorer (fzf)
 if executable('fzf')
   for s:fzf_home in ['~/.fzf', '$HOMEBREW_PREFIX/opt/fzf']
-    if exists('s:fzf_home')
+    if isdirectory(expand(s:fzf_home))
       " execute 'set runtimepath+=' . expand(s:fzf_home)
       let &runtimepath .= ',' . expand(s:fzf_home)
       nnoremap <leader><C-f> :FZF<CR>
