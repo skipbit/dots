@@ -3,6 +3,9 @@
 	excludesfile = /Users/endo/.gitexcludes
 	quotepath = false
 
+[init]
+    defaultBranch = main
+
 [user]
 	name = Yuma Endo
 	email = endo@skipbit.jp
