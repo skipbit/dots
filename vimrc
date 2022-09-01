@@ -102,10 +102,17 @@ if executable('fzf')
   nnoremap <leader>zm :Maps<CR>
   nnoremap <leader>zt :BTags<CR>
   nnoremap <leader>zT :Tags<CR>
+  nnoremap <leader>zr :Rg<CR>
 
   nnoremap <silent> g<C-]> :call fzf#vim#tags(expand('<cword>'))<CR>
   " nnoremap <silent> g<C-[> :call fzf#run(fzf#wrap({'source': 'cscope -f .scope -L -3 ' . expand('<cword>') . ' $(git ls-files --recurse-submodule)'}))<CR>
   " command! -bang -nargs=? -complete=dir BLines call fzf#vim#buffer_lines(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+  " completion support
+  inoremap <expr> <C-x><C-f>  fzf#vim#complete#path('fd')
+  inoremap <expr> <C-x><C-f>  fzf#vim#complete#path('rg --files')
+  inoremap <expr> <C-x><C-k>  fzf#vim#complete#word({'window': {'width': 0.2, 'height': 0.9, 'xoffset': 1}})
+  inoremap <expr> <C-x><C-l>  fzf#vim#complete(fzf#wrap({'prefix': '^.*#', 'source': 'rg -n ^ --color always', 'options': '--ansi --delimiter : --nth 3..', 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
 endif
 
 " tools/scm
