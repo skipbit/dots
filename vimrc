@@ -255,7 +255,10 @@ vnoremap <leader>g "zy:vimgrep /<C-r>z\c/gj `git ls-files --recurse-submodule` <
 vnoremap <leader>G "zy:vimgrep /<C-r>z\C/gj `git ls-files --recurse-submodule` <Bar>cwindow<CR>
 
 syntax enable
+
 colorscheme desert
+" update/overwrite colorscheme definition
+highlight Normal ctermbg=none
 
 " paste support
 if &term =~ "xterm"
