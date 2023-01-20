@@ -135,6 +135,13 @@ endif
 " tools/vim-fugitive
 call dein#add('tpope/vim-fugitive')
 
+" tools/vim-gitgutter
+call dein#add('airblade/vim-gitgutter')
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+nmap <Leader>ha <Plug>(GitGutterStageHunk)
+nmap <Leader>hu <Plug>(GitGutterRevertHunk)
+
 call dein#end()
 filetype plugin indent on     " filetype plugin (filetype 毎に固有の設定) を有効にする
 
