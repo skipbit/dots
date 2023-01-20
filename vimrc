@@ -132,25 +132,8 @@ if executable('tig')
   nnoremap <leader>t-V :vert term ++close tig -- %<CR>
 endif
 
-" tools/scm/git
-if executable('git')
-  function GitDiff()
-    :silent write
-    :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
-    :redraw!
-  endfunction
-  "nnoremap <leader>gd :call GitDiff()<cr>
-  command! Gd :call GitDiff()
-
-  function GitVimDiff()
-    :silent write
-    :silent execute '!git difftool --tool=vimdiff -- ' . expand(' %:p')
-    :redraw!
-  endfunction
-  "nnoremap <leader>vd: call GitVimDiff()
-  command! Gdv :call GitVimDiff()
-  command! Gvd :call GitVimDiff()
-endif
+" tools/vim-fugitive
+call dein#add('tpope/vim-fugitive')
 
 call dein#end()
 filetype plugin indent on     " filetype plugin (filetype 毎に固有の設定) を有効にする
@@ -295,6 +278,26 @@ endif
 " diff support (/usr/share/vim/vim74/vimrc_example.vim)
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
+endif
+
+" git-diff support
+if executable('git')
+  function GitDiff()
+    :silent write
+    :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
+    :redraw!
+  endfunction
+  "nnoremap <leader>gd :call GitDiff()<cr>
+  command! Gd :call GitDiff()
+
+  function GitVimDiff()
+    :silent write
+    :silent execute '!git difftool --tool=vimdiff -- ' . expand(' %:p')
+    :redraw!
+  endfunction
+  "nnoremap <leader>vd: call GitVimDiff()
+  command! Gdv :call GitVimDiff()
+  command! Gvd :call GitVimDiff()
 endif
 
 " templates
