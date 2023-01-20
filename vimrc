@@ -115,7 +115,7 @@ if executable('fzf')
   inoremap <expr> <C-x><C-l>  fzf#vim#complete(fzf#wrap({'prefix': '^.*#', 'source': 'rg -n ^ --color always', 'options': '--ansi --delimiter : --nth 3..', 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
 endif
 
-" tools/scm
+" tools/scm/tig
 if executable('tig')
   call dein#add('iberianpig/tig-explorer.vim')
   nnoremap <leader>tp :TigOpenProjectRootDir<CR>
@@ -130,6 +130,26 @@ if executable('tig')
   nnoremap <leader>t-S :term ++close tig -- %<CR>
   nnoremap <leader>t-v :vert term ++close tig status<CR>
   nnoremap <leader>t-V :vert term ++close tig -- %<CR>
+endif
+
+" tools/scm/git
+if executable('git')
+  function GitDiff()
+    :silent write
+    :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
+    :redraw!
+  endfunction
+  "nnoremap <leader>gd :call GitDiff()<cr>
+  command! Gd :call GitDiff()
+
+  function GitVimDiff()
+    :silent write
+    :silent execute '!git difftool --tool=vimdiff -- ' . expand(' %:p')
+    :redraw!
+  endfunction
+  "nnoremap <leader>vd: call GitVimDiff()
+  command! Gdv :call GitVimDiff()
+  command! Gvd :call GitVimDiff()
 endif
 
 call dein#end()
