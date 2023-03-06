@@ -40,11 +40,13 @@ install-vim:
 	@ln -s $(SOURCE)/vimrc $(DESTINATION)/.vimrc
 	@mkdir $(DESTINATION)/.vim
 	@ln -s $(SOURCE)/vim-templates $(DESTINATION)/.vim/templates
+	@ln -s $(SOURCE)/nvim $(DESTINATION)/.config/nvim
 
 uninstall-vim:
 	@mv $(DESTINATION)/.exrc $(DESTINATION)/.cleanup/
 	@mv $(DESTINATION)/.vimrc $(DESTINATION)/.cleanup/
 	@mv $(DESTINATION)/.vim $(DESTINATION)/.cleanup/
+	@mv $(DESTINATION)/.config/nvim $(DESTINATION)/.cleanup/
 
 install-screen:
 	@ln -s $(SOURCE)/screenrc $(DESTINATION)/.screenrc
