@@ -86,7 +86,13 @@ if executable('fzf')
   endfor
 
   call dein#add('junegunn/fzf.vim')
-  let g:fzf_action = {'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit'}
+  function! s:fzf_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{"filename": v:val}'))
+    copen
+    cc
+  endfunction
+  let g:fzf_action = {'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit', 'ctrl-q': function('s:fzf_quickfix_list')}
+  let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
   nnoremap <leader>zz :GFiles?<CR>
   nnoremap <leader>zf :GFiles --recurse-submodule<CR>
   nnoremap <leader>zF :Files<CR>
