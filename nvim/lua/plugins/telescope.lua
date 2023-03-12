@@ -18,11 +18,15 @@ telescope.setup({
     }
 })
 
-vim.keymap.set('n', '<leader><C-f>', '<cmd>Telescope find_files<CR>')
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader><C-f>', builtin.find_files, {})
 
-vim.keymap.set('n', '<leader>zf', '<cmd>Telescope git_files<CR>')
-vim.keymap.set('n', '<leader>zh', '<cmd>Telescope search_history')
-vim.keymap.set('n', '<leader>zt'. '<cmd>Telescope tags')
+vim.keymap.set('n', '<leader>zf', builtin.git_files, {})
+vim.keymap.set('n', '<leader>zh', builtin.search_history, {})
+vim.keymap.set('n', '<leader>zt', builtin.tags, {})
+vim.keymap.set('n', '<leader>??', function()
+    builtin.grep_string({ search = vim.fn.input("Grep > ") });
+end)
 
 telescope.load_extension('fzf')
 
