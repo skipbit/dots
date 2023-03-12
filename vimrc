@@ -277,6 +277,12 @@ inoremap <C-k> <Esc>:m .-2<CR>==gi
 " 選択部分を J で下に移動、K で上に移動
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+" ページスクロール時、カーソル行をセンタリング
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+" 検索時、カーソル行をセンタリング
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 syntax enable
 
