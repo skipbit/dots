@@ -269,11 +269,11 @@ nnoremap <leader>G :vimgrep /<C-r><C-w>\C/gj `git ls-files --recurse-submodule` 
 " \g で 選択中の単語を git repository の登録ファイル内から検索 (vimgrep + quickfix) -> \G なら case-sensitive
 vnoremap <leader>g "zy:vimgrep /<C-r>z\c/gj `git ls-files --recurse-submodule` <Bar>cwindow<CR>
 vnoremap <leader>G "zy:vimgrep /<C-r>z\C/gj `git ls-files --recurse-submodule` <Bar>cwindow<CR>
-" C-j で現在の行を上に移動、C-k で下に移動
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
+" C-j で現在の行を上に移動、C-k で下に移動 -> 誤操作起きやすいため pending
+"-- nnoremap <C-j> :m .+1<CR>==
+"-- nnoremap <C-k> :m .-2<CR>==
+"-- inoremap <C-j> <Esc>:m .+1<CR>==gi
+"-- inoremap <C-k> <Esc>:m .-2<CR>==gi
 " 選択部分を J で下に移動、K で上に移動
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
