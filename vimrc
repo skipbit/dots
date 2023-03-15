@@ -91,7 +91,7 @@ if executable('fzf')
     copen
     cc
   endfunction
-  let g:fzf_action = {'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit', 'ctrl-q': function('s:fzf_quickfix_list')}
+  let g:fzf_action = {'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit', 'ctrl-f': function('s:fzf_quickfix_list')}
   let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
   nnoremap <leader>zz :GFiles?<CR>
   nnoremap <leader>zf :GFiles --recurse-submodule<CR>
