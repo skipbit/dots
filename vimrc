@@ -187,6 +187,7 @@ set expandtab                 " タブを空白に置き換える
 set ts=4 sw=4 sts=0           " tabstop, softtabstop, shiftwidth=スマートインデントの増減幅
 set autoindent                " 前の行のインデントを継続
 set smartindent               " 構文に応じてインデントを調節
+set nrformats=                " インクリメント <C-a> / デクリメント <C-x> の動作を常に10進数にする
 augroup GenericFileTypeIndent
   autocmd!
   autocmd BufNewFile,BufRead,FileType vim  setlocal tabstop=2 softtabstop=2 shiftwidth=2
