@@ -69,6 +69,19 @@ if executable('clangd')
   let g:asyncomplete_auto_popup = 0
 endif
 
+" tools/dap
+if executable('lldb') || executable('gdb')
+  call dein#add('puremourning/vimspector')
+  let g:vimspector_enable_mappings = 'HUMAN'
+  let g:vimspector_install_gadgets = [ 'vscode-cpptools', 'codelldb' ]
+  nnoremap <leader><C-r> :call vimspector#Launch()<CR>
+  nnoremap <leader><C-x> :call vimspector#Reset()<CR>
+  nmap <leader>bs <Plug>VimspectorToggleBreakpoint
+  nmap <leader>bl <Plug>VimspectorBreakpoints
+  nmap <leader>di <Plug>VimspectorBalloonEval
+  xmap <leader>di <Plug>VimspectorBalloonEval
+endif
+
 " tools/explorer (nerdtree)
 call dein#add('scrooloose/nerdtree')
 nnoremap <C-l> :NERDTreeToggle<CR>
@@ -179,6 +192,7 @@ set showmode                  " 現在のモード表示
 set wildmenu                  " コマンドモードの補完 (tab)
 set foldmethod=marker         " 折りたたみ方法
 set nowrap                    " 折り返ししない
+set diffopt+=vertical         " vimdiff 垂直分割
 
 " EDITING
 set modeline                  " モードラインを有効にする
@@ -207,7 +221,8 @@ nnoremap gs <C-w>f<CR>
 nnoremap gv :vertical wincmd f<CR>
 
 " COMPLETION
-set dictionary=/usr/share/dict/words  " 辞書を指定 (CTRL-X CTRL-K)
+set dictionary=/usr/share/dict/words      " 辞書を指定 (CTRL-X CTRL-K)
+set completeopt=menuone,noinsert,noselect " 選択と挿入は自分で判断する
 
 if executable('ctags')
   if filereadable('.tags')
