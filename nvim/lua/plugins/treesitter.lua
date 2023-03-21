@@ -11,7 +11,6 @@ treesitter.setup({
         'cpp',
         'help',
         'lua',
-        'java',
         'json',
         'markdown',
         'rust',
