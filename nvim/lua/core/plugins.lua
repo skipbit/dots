@@ -14,61 +14,84 @@ return require('lazy').setup({
     'vim-scripts/a.vim',
     'editorconfig/editorconfig-vim',
 
-    -- lsp
+    --[[ backends ]]--
     {
-        'neovim/nvim-lspconfig',
-        dependencies = {
-            { 'williamboman/mason.nvim' },
-            { 'williamboman/mason-lspconfig.nvim' },
-            { 'j-hui/fidget.nvim' },
-            { 'folke/neodev.nvim' },
+        -- lsp
+        {
+            'neovim/nvim-lspconfig',
+            dependencies = {
+                { 'williamboman/mason.nvim' },
+                { 'williamboman/mason-lspconfig.nvim' },
+                { 'j-hui/fidget.nvim' },
+                { 'folke/neodev.nvim' },
+            },
         },
-    },
-    -- auto completion
-    {
-        'hrsh7th/nvim-cmp',
-        dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path'
-        }
-    },
-
-    -- syntax highlight
-    {
-        'nvim-treesitter/nvim-treesitter',
-        dependencies = {
-            { 'nvim-treesitter/nvim-treesitter-textobjects' },
-        },
-        config = function()
-            pcall(require('nvim-treesitter.install').update { with_sync = true })
-        end
-    },
-
-    -- telescope
-    {
-        'nvim-telescope/telescope.nvim',
-        dependencies = {
-            { 'nvim-lua/plenary.nvim' },
-            {
-                'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'make',
-                cond = function()
-                    return vim.fn.executable 'make' == 1
-                end,
+        -- auto completion
+        {
+            'hrsh7th/nvim-cmp',
+            dependencies = {
+                'hrsh7th/cmp-nvim-lsp',
+                'hrsh7th/cmp-buffer',
+                'hrsh7th/cmp-path'
             }
         },
+        -- syntax highlight
+        {
+            'nvim-treesitter/nvim-treesitter',
+            dependencies = {
+                { 'nvim-treesitter/nvim-treesitter-textobjects' },
+            },
+            config = function()
+                pcall(require('nvim-treesitter.install').update { with_sync = true })
+            end
+        },
     },
 
-    -- colorscheme
+    --[[ explore ]]--
     {
-        { 'edeneast/nightfox.nvim' },
-        { 'folke/tokyonight.nvim' },
-        { 'catppuccin/nvim', as = 'catppuccin' },
-        { 'jacoborus/tender.vim' },
-        { 'rose-pine/neovim' }
+        -- telescope
+        {
+            'nvim-telescope/telescope.nvim',
+            dependencies = {
+                { 'nvim-lua/plenary.nvim' },
+                {
+                    'nvim-telescope/telescope-fzf-native.nvim',
+                    build = 'make',
+                    cond = function()
+                        return vim.fn.executable 'make' == 1
+                    end,
+                }
+            },
+        },
+        -- files
+        { 'nvim-tree/nvim-tree.lua', dependencies = { 'nvim-tree/nvim-web-devicons' }},
+        -- scm
+        {
+            'tpope/vim-fugitive',
+            'airblade/vim-gitgutter',
+        },
     },
 
-    -- files
-    { 'nvim-tree/nvim-tree.lua', dependencies = { 'nvim-tree/nvim-web-devicons' }},
+    --[[ apprearance ]]--
+    {
+        {
+            'nvim-lualine/lualine.nvim',
+            dependencies = { 'nvim-tree/nvim-web-devicons' },
+            opts = {
+                options = {
+                    icons_enabled = true,
+                    theme = 'auto',
+                },
+            },
+        },
+        -- colorscheme
+        {
+            { 'edeneast/nightfox.nvim' },
+            { 'folke/tokyonight.nvim' },
+            { 'catppuccin/nvim', as = 'catppuccin' },
+            { 'jacoborus/tender.vim' },
+            { 'rose-pine/neovim' },
+            { 'nyoom-engineering/oxocarbon.nvim' },
+        },
+    },
 })

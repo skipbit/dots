@@ -1,7 +1,7 @@
 
 -- GENERIC
 vim.o.fileformats = 'unix', 'mac', 'dos'
-vim.o.fileencoding = 'utf-8'
+vim.o.encoding = 'utf-8'
 vim.o.backup = false
 vim.o.swapfile = false
 vim.o.helplang = 'ja', 'en'
@@ -30,6 +30,7 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.autoindent = true
 vim.o.smartindent = true
+vim.o.nrformats = ''
 
 -- SEARCHING
 vim.o.ignorecase = true
