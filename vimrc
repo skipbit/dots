@@ -171,7 +171,7 @@ let s:palette.insert.left = [['#005f5f', '#ffffff', 23, 231], ['#ffffff', '#0087
 let s:palette.visual.left = [['#870000', '#ff8700', 88, 208], ['#ffffff', '#585858', 231, 240]]
 let s:palette.replace.left = [['#ffffff', '#df0000', 231, 160], ['#ffffff', '#585858', 231, 240]]
 let s:palette.tabline.tabsel = [['#bcbcbc', '#262626', 255, 0]]
-let s:palette.inactive.left = [['#606060', '#d0d0d0', 241, 252], ['#bcbcbc', '#585858', 250, 240]]
+let s:palette.inactive.left = [['#ffffff', '#585858', 231, 240]]
 let s:palette.inactive.right = [['#606060', '#d0d0d0', 241, 252], ['#bcbcbc', '#585858', 250, 240], ['#9e9e9e', '#303030', 247, 236]]
 let s:palette.inactive.middle = [['#8a8a8a', '#636363', 245, 236]]
 unlet s:palette
