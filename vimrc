@@ -161,6 +161,18 @@ nmap [h <Plug>(GitGutterPrevHunk)
 nmap <Leader>ha <Plug>(GitGutterStageHunk)
 nmap <Leader>hu <Plug>(GitGutterRevertHunk)
 
+" themes/lightline
+call dein#add('itchyny/lightline.vim')
+let g:lightline = { 'colorscheme': 'default' }
+" -- lightline/default(powerline) color changes (bold-off to plain)
+let s:palette = g:lightline#colorscheme#default#palette
+let s:palette.normal.left = [['#005f00', '#afdf00', 22, 148], ['#ffffff', '#585858', 231, 240]]
+let s:palette.insert.left = [['#005f5f', '#ffffff', 23, 231], ['#ffffff', '#0087af', 231, 31]]
+let s:palette.visual.left = [['#870000', '#ff8700', 88, 208], ['#ffffff', '#585858', 231, 240]]
+let s:palette.replace.left = [['#ffffff', '#df0000', 231, 160], ['#ffffff', '#585858', 231, 240]]
+let s:palette.tabline.tabsel = [['#bcbcbc', '#262626', 255, 0]]
+unlet s:palette
+
 call dein#end()
 filetype plugin indent on     " filetype plugin (filetype 毎に固有の設定) を有効にする
 
