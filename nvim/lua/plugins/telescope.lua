@@ -14,12 +14,28 @@ telescope.setup({
                 ['<C-j>'] = actions.move_selection_next,
                 ['<C-f>'] = actions.send_selected_to_qflist + actions.open_qflist,
             }
-        }
+        },
     },
     pickers = {
+        buffers = {
+            disable_devicons = true,
+        },
+        find_files = {
+            disable_devicons = true,
+        },
         git_files = {
-            recurse_submodules = true
-        }
+            recurse_submodules = true,
+            disable_devicons = true,
+        },
+        grep_string = {
+            disable_devicons = true,
+        },
+        live_grep = {
+            disable_devicons = true,
+        },
+        oldfiles = {
+            disable_devicons = true,
+        },
     }
 })
 
