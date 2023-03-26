@@ -73,15 +73,8 @@ return require('lazy').setup({
 
     --[[ apprearance ]]--
     {
-        {
-            'nvim-lualine/lualine.nvim',
-            opts = {
-                options = {
-                    icons_enabled = false,
-                    theme = 'auto',
-                },
-            },
-        },
+        -- status bar
+        { 'nvim-lualine/lualine.nvim' },
         -- colorscheme
         {
             { 'edeneast/nightfox.nvim' },
