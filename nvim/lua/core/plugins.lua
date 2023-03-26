@@ -11,7 +11,6 @@ return require('lazy').setup({
     -- general
     'vim-jp/vimdoc-ja',
     'vim-jp/cpp-vim',
-    'vim-scripts/a.vim',
     'editorconfig/editorconfig-vim',
 
     --[[ backends ]]--
