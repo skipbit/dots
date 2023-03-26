@@ -41,6 +41,6 @@ vim.o.wrapscan = true
 
 -- APPEARANCE
 vim.o.termguicolors = true
-vim.o.winblend = 20
-vim.o.pumblend = 20
+vim.o.winblend = 0
+vim.o.pumblend = 0
 
