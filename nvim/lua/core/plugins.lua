@@ -63,7 +63,7 @@ return require('lazy').setup({
             },
         },
         -- files
-        { 'nvim-tree/nvim-tree.lua', dependencies = { 'nvim-tree/nvim-web-devicons' }},
+        { 'nvim-tree/nvim-tree.lua' },
         -- scm
         {
             'tpope/vim-fugitive',
@@ -75,10 +75,9 @@ return require('lazy').setup({
     {
         {
             'nvim-lualine/lualine.nvim',
-            dependencies = { 'nvim-tree/nvim-web-devicons' },
             opts = {
                 options = {
-                    icons_enabled = true,
+                    icons_enabled = false,
                     theme = 'auto',
                 },
             },

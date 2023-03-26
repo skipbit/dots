@@ -21,6 +21,11 @@ require('nvim-tree').setup({
         side = left,
         width = 40,
     },
+    renderer = {
+        icons = {
+            show = { file = false, folder = false, folder_arrow = true, git = false, modified = false }
+        },
+    },
 })
 
 local api = require('nvim-tree.api')
