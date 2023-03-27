@@ -91,7 +91,9 @@ vim.keymap.set('n', '<leader>gD', builtin.lsp_type_definitions, {})
 vim.keymap.set('n', '<leader>gs', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>gS', builtin.lsp_workspace_symbols, {})
 vim.keymap.set('n', '<leader>g?', builtin.lsp_dynamic_workspace_symbols, {})
-vim.keymap.set('n', '<leader>ge', builtin.diagnostics, {})
+vim.keymap.set('n', '<leader>gh', builtin.lsp_incoming_calls, {})
+vim.keymap.set('n', '<leader>gH', builtin.lsp_outgoing_calls, {})
+vim.keymap.set('n', '<leader><space>e', builtin.diagnostics, {})
 
 -- Telescope pickers
 vim.keymap.set('n', '<leader>??', builtin.builtin, {})
