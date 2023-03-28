@@ -78,11 +78,9 @@ return require('lazy').setup({
         -- colorscheme
         {
             { 'edeneast/nightfox.nvim' },
-            { 'folke/tokyonight.nvim' },
-            { 'catppuccin/nvim', as = 'catppuccin' },
-            { 'jacoborus/tender.vim' },
-            { 'rose-pine/neovim' },
-            { 'nyoom-engineering/oxocarbon.nvim' },
+            { 'tomasr/molokai' },
+            { 'tanvirtin/monokai.nvim' },
+            { 'Mofiqul/dracula.nvim' },
         },
     },
 })

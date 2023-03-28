@@ -6,7 +6,7 @@ if not status then
     return
 end
 --]]
-pcall(vim.cmd 'colorscheme habamax')
+pcall(vim.cmd 'colorscheme dracula')
 
 function colormypencils(color)
     color = color or "rose-pine"
