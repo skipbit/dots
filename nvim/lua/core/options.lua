@@ -4,6 +4,7 @@ vim.o.fileformats = 'unix', 'mac', 'dos'
 vim.o.encoding = 'utf-8'
 vim.o.backup = false
 vim.o.swapfile = false
+vim.o.updatetime = 200
 vim.o.helplang = 'ja', 'en'
 
 vim.o.completeopt = 'menu,menuone,noselect'
