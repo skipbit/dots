@@ -17,30 +17,28 @@ return require('lazy').setup({
     {
         -- lsp
         {
-            'neovim/nvim-lspconfig',
-            dependencies = {
+            'neovim/nvim-lspconfig', dependencies = {
                 { 'williamboman/mason.nvim' },
                 { 'williamboman/mason-lspconfig.nvim' },
-                { 'j-hui/fidget.nvim' },
-                { 'folke/neodev.nvim' },
             },
         },
         -- auto completion
         {
-            'hrsh7th/nvim-cmp',
-            dependencies = {
-                'hrsh7th/cmp-nvim-lsp',
-                'hrsh7th/cmp-buffer',
-                'hrsh7th/cmp-path'
-            }
+            {
+                'hrsh7th/nvim-cmp', dependencies = {
+                    'hrsh7th/cmp-nvim-lsp',
+                    'hrsh7th/cmp-buffer',
+                    'hrsh7th/cmp-path',
+                    'hrsh7th/cmp-cmdline',
+                },
+            },
+            { 'hrsh7th/vim-vsnip' },
         },
         -- syntax highlight
         {
-            'nvim-treesitter/nvim-treesitter',
-            dependencies = {
+            'nvim-treesitter/nvim-treesitter', dependencies = {
                 { 'nvim-treesitter/nvim-treesitter-textobjects' },
-            },
-            config = function()
+            }, config = function()
                 pcall(require('nvim-treesitter.install').update { with_sync = true })
             end
         },
@@ -50,16 +48,12 @@ return require('lazy').setup({
     {
         -- telescope
         {
-            'nvim-telescope/telescope.nvim',
-            dependencies = {
+            'nvim-telescope/telescope.nvim', dependencies = {
                 { 'nvim-lua/plenary.nvim' },
-                {
-                    'nvim-telescope/telescope-fzf-native.nvim',
-                    build = 'make',
-                    cond = function()
+                { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', cond = function()
                         return vim.fn.executable 'make' == 1
                     end,
-                }
+                },
             },
         },
         -- files
