@@ -6,7 +6,7 @@ if not status then
     return
 end
 --]]
-pcall(vim.cmd 'colorscheme monokai')
+pcall(vim.cmd 'colorscheme sonokai')
 
 function colormypencils(color)
     color = color or "rose-pine"

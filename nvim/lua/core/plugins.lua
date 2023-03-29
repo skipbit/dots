@@ -74,6 +74,7 @@ return require('lazy').setup({
             { 'edeneast/nightfox.nvim' },
             { 'tomasr/molokai' },
             { 'tanvirtin/monokai.nvim' },
+            { 'sainnhe/sonokai' },
             { 'Mofiqul/dracula.nvim' },
         },
     },
