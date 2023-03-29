@@ -99,4 +99,5 @@ vim.keymap.set('n', '<leader><space>e', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>??', builtin.builtin, {})
 
 telescope.load_extension('fzf')
+telescope.load_extension('dap')
 

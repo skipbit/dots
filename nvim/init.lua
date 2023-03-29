@@ -5,6 +5,7 @@ vim.g.maplocalleader = '\\'
 
 require 'core.plugins'
 require 'plugins.lsp'
+require 'plugins.dap'
 require 'plugins.mason'
 require 'plugins.completion'
 require 'plugins.treesitter'

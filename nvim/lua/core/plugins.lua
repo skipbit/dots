@@ -22,6 +22,11 @@ return require('lazy').setup({
                 { 'williamboman/mason-lspconfig.nvim' },
             },
         },
+        -- dap
+        {
+            'mfussenegger/nvim-dap',
+            'rcarriga/nvim-dap-ui',
+        },
         -- auto completion
         {
             {
@@ -54,6 +59,7 @@ return require('lazy').setup({
                         return vim.fn.executable 'make' == 1
                     end,
                 },
+                { 'nvim-telescope/telescope-dap.nvim' },
             },
         },
         -- files
