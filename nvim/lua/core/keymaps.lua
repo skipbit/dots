@@ -25,4 +25,7 @@ vim.keymap.set('t', '<C-w>w', '<Cmd>wincmd w<CR>', { silent = true })
 vim.keymap.set('t', '<C-w><C-w>', '<Cmd>wincmd <C-w><CR>', { silent = true })
 vim.keymap.set('t', '<C-w>gt', '<Cmd>wincmd gt<CR>', { silent = true })
 vim.keymap.set('t', '<C-w>gT', '<Cmd>wincmd gT<CR>', { silent = true })
+vim.keymap.set('t', '<C-w>|', '<Cmd>wincmd |<CR>', { silent = true })
+vim.keymap.set('t', '<C-w>_', '<Cmd>wincmd _<CR>', { silent = true })
+vim.keymap.set('t', '<C-w>=', '<Cmd>wincmd =<CR>', { silent = true })
 
