@@ -50,21 +50,21 @@ vim.keymap.set('n', '<leader>zf', builtin.git_files, {})
 
 -- Vim pickers
 vim.keymap.set('n', '<leader>zb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>zt', builtin.tags, {})
+vim.keymap.set('n', '<leader>zT', builtin.tags, {})
 vim.keymap.set('n', '<leader>zh', builtin.oldfiles, {})
 vim.keymap.set('n', '<leader>z:', builtin.command_history, {})
 vim.keymap.set('n', '<leader>z/', builtin.search_history, {})
 vim.keymap.set('n', '<leader>zq', builtin.quickfix, {})
 vim.keymap.set('n', '<leader>qq', builtin.quickfixhistory, {})
 vim.keymap.set('n', '<leader>zj', builtin.jumplist, {})
-vim.keymap.set('n', '<leader>zl', builtin.loclist, {})
+-- vim.keymap.set('n', '<leader>zl', builtin.loclist, {})
 vim.keymap.set('n', '<leader>zm', builtin.marks, {})
 vim.keymap.set('n', '<leader>zp', builtin.registers, {})
 vim.keymap.set('n', '<leader>zk', builtin.keymaps, {})
 vim.keymap.set('n', '<leader>zc', builtin.colorscheme, {})
 -- vim.keymap.set('n', '<leader>z*', builtin.highlights, {}) -- highlight color for current colorscheme
-vim.keymap.set('n', '<leader>za', builtin.autocommands, {})
-vim.keymap.set('n', '<leader>zo', builtin.vim_options, {})
+-- vim.keymap.set('n', '<leader>za', builtin.autocommands, {})
+-- vim.keymap.set('n', '<leader>zo', builtin.vim_options, {})
 
 -- Help pickers
 vim.keymap.set('n', '<leader>?h', builtin.help_tags, {})
@@ -72,18 +72,17 @@ vim.keymap.set('n', '<leader>?m', builtin.man_pages, {})
 
 -- Grep pickers
 vim.keymap.set('n', '<leader>z*', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>//', function()
+vim.keymap.set('n', '<leader>z?', function()
     builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
---vim.keymap.set('n', '<leader>z?', builtin.pickers, {})
-vim.keymap.set('n', '<leader>zL', builtin.current_buffer_fuzzy_find, {})
+vim.keymap.set('n', '<leader>zl', builtin.current_buffer_fuzzy_find, {})
 vim.keymap.set('n', '<leader>zt', builtin.current_buffer_tags, {})
 
 -- Git pickers
-vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})
-vim.keymap.set('n', '<leader>gC', builtin.git_bcommits, {})
+vim.keymap.set('n', '<leader>zG', builtin.git_commits, {})
+vim.keymap.set('n', '<leader>zg', builtin.git_bcommits, {})
 vim.keymap.set('n', '<leader>gb', builtin.git_branches, {})
-vim.keymap.set('n', '<leader>gf', builtin.git_status, {})
+vim.keymap.set('n', '<leader>zz', builtin.git_status, {})
 vim.keymap.set('n', '<leader>gz', builtin.git_stash, {})
 
 -- LSP pickers
@@ -100,6 +99,7 @@ vim.keymap.set('n', '<leader><space>e', builtin.diagnostics, {})
 
 -- Telescope pickers
 vim.keymap.set('n', '<leader>??', builtin.builtin, {})
+vim.keymap.set('n', '<leader>//', builtin.commands, {})
 
 telescope.load_extension('fzf')
 telescope.load_extension('dap')
