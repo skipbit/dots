@@ -36,6 +36,9 @@ telescope.setup({
         oldfiles = {
             disable_devicons = true,
         },
+        current_buffer_fuzzy_find = {
+            sorting_strategy = 'ascending',
+        },
     }
 })
 
