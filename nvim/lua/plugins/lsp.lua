@@ -62,3 +62,10 @@ lspconfig.rust_analyzer.setup({
     on_attach = on_attach,
     flags = { debounce_text_changes = 150 },
 })
+
+-- python-lsp-server (Python)
+lspconfig.pylsp.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = { debounce_text_changes = 150 },
+})
