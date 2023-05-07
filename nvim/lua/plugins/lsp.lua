@@ -46,7 +46,7 @@ local on_attach = function(client, bufnr)
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, buffer_options)
 
-    vim.keymap.set('n', '<C-a>', '<cmd>ClangdSwitchSourceHeader<CR>', {})
+    vim.keymap.set('n', '<leader>a', '<cmd>ClangdSwitchSourceHeader<CR>', {})
 end
 
 -- clangd (C/C++)
