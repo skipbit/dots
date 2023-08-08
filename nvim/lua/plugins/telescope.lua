@@ -32,6 +32,10 @@ telescope.setup({
         },
         live_grep = {
             disable_devicons = true,
+            additional_args = function(opts)
+                return { "--hidden" }
+            end,
+            file_ignore_patterns = { '.git', '.hg', '.bzr', '.svn', '.cvs' },
         },
         oldfiles = {
             disable_devicons = true,
