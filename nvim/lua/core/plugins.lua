@@ -7,6 +7,12 @@ if not vim.loop.fs_stat(lazy_path) then
 end
 vim.opt.rtp:prepend(lazy_path)
 
+local lazy_options = {
+    ui = {
+        border = 'rounded',
+    },
+}
+
 return require('lazy').setup({
     -- general
     'vim-jp/vimdoc-ja',
@@ -84,4 +90,4 @@ return require('lazy').setup({
             { 'Mofiqul/dracula.nvim' },
         },
     },
-})
+}, lazy_options)

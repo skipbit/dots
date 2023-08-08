@@ -49,6 +49,14 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>a', '<cmd>ClangdSwitchSourceHeader<CR>', {})
 end
 
+-- border settings
+local border_config = { border = 'rounded' }
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, border_config)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, border_config)
+vim.diagnostic.config {
+    float = border_config
+}
+
 -- clangd (C/C++)
 lspconfig.clangd.setup({
     capabilities = capabilities,

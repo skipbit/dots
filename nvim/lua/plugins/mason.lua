@@ -5,7 +5,11 @@ if not status then
     return
 end
 
-mason.setup()
+mason.setup({
+    ui = {
+        border = 'rounded',
+    }
+})
 
 -- mason-lspconfig (language server)
 local status, mason_lspconfig = pcall(require, 'mason-lspconfig')
