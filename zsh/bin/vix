@@ -1,0 +1,11 @@
+#!/bin/bash
+# GIT_EDITOR support script.
+# - It will select either vim or nvim depending on the situation.
+
+if [ -n "${VIM_TERMINAL}" ]; then
+  vim "${@}"
+elif type nvim; then
+  nvim "${@}"
+else
+  vi "${@}"
+fi
