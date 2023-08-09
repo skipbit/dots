@@ -199,6 +199,7 @@ set number                    " 行番号表示
 set ruler                     " 画面最下部にルーラー表示
 set cursorline                " カーソルのある行をハイライト
 set laststatus=2              " ステータスラインを常に表示
+set signcolumn=yes            " サインカラムを常に表示
 
 set showcmd                   " 実行したコマンドをステータスライン下に表示
 set showmatch                 " 閉じカッコに対応するカッコを表示
