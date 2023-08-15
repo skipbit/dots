@@ -114,14 +114,15 @@ if executable('fzf')
   nnoremap <leader>zl :BLines<CR>
   nnoremap <leader>zL :Lines<CR>
   nnoremap <leader>zh :History<CR>
-  nnoremap <leader>zc :History:<CR>
+  nnoremap <leader>z: :History:<CR>
   nnoremap <leader>z/ :History/<CR>
   nnoremap <leader>zg :BCommits<CR>
   nnoremap <leader>zG :Commits<CR>
-  nnoremap <leader>zm :Maps<CR>
+  nnoremap <leader>zk :Maps<CR>
   nnoremap <leader>zt :BTags<CR>
   nnoremap <leader>zT :Tags<CR>
-  nnoremap <leader>zr :Rg<CR>
+  nnoremap <leader>z* :Rg<CR>
+  nnoremap <leader>?h :Helptags<CR>
 
   nnoremap <silent> g<C-]> :call fzf#vim#tags(expand('<cword>'))<CR>
   " nnoremap <silent> g<C-[> :call fzf#run(fzf#wrap({'source': 'cscope -f .scope -L -3 ' . expand('<cword>') . ' $(git ls-files --recurse-submodule)'}))<CR>
@@ -295,6 +296,8 @@ nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 " 選択部分を * で検索 (# で後方検索)
 vnoremap * "zy:let @/ = @z<CR>n
 vnoremap # "zy:let @/ = @z<CR>N
+" \z? で プロンプトから得た文字列を git repository の登録ファイル内から検索
+nnoremap <leader>z? :exec ":vimgrep /" . input('Grep > ') . "/gj `git ls-files --recurse-submodule`"<Bar>cwindow<CR>
 " \g で カーソル下の単語を git repository の登録ファイル内から検索 (vimgrep + quickfix) -> \G なら case-sensitive
 nnoremap <leader>g :vimgrep /<C-r><C-w>\c/gj `git ls-files --recurse-submodule` <Bar>cwindow<CR>
 nnoremap <leader>G :vimgrep /<C-r><C-w>\C/gj `git ls-files --recurse-submodule` <Bar>cwindow<CR>
@@ -321,6 +324,7 @@ syntax enable
 colorscheme desert
 " update/overwrite colorscheme definition
 highlight Normal ctermbg=none
+highlight NonText term=bold ctermfg=81 ctermbg=black guifg=#6dceeb guibg=black " original: term=bold ctermfg=81 ctermbg=239 guifg=#6dceeb guibg=#4d4d4d
 
 " paste support
 if &term =~ "xterm"
