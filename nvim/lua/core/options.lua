@@ -19,6 +19,7 @@ vim.o.ruler = true
 vim.o.wrap = false
 vim.o.cursorline = true
 vim.o.laststatus = 2
+vim.o.signcolumn = 'yes'
 
 vim.o.showcmd = true
 vim.o.showmatch = true

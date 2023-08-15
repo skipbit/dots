@@ -72,8 +72,13 @@ return require('lazy').setup({
         { 'nvim-tree/nvim-tree.lua' },
         -- scm
         {
-            'tpope/vim-fugitive',
-            'airblade/vim-gitgutter',
+            'NeogitOrg/neogit', dependencies = {
+                'nvim-lua/plenary.nvim',
+                'nvim-telescope/telescope.nvim',
+                'sindrets/diffview.nvim',
+            },
+            { 'lewis6991/gitsigns.nvim' },
+            { 'sindrets/diffview.nvim' },
         },
     },
 

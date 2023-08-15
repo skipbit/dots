@@ -13,6 +13,7 @@ require 'plugins.treesitter'
 require 'plugins.telescope'
 require 'plugins.nvim-tree'
 require 'plugins.lualine'
+require 'plugins.git'
 
 require 'core.options'
 require 'core.themes'
