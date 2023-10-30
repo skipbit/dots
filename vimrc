@@ -36,7 +36,7 @@ if executable('clangd')
 
   au User lsp_setup call lsp#register_server({
         \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd', '-background-index']},
+        \ 'cmd': {server_info->['clangd', '-background-index', '-clang-tidy']},
         \ 'whitelist': ['c', 'cpp', 'cuda', 'objc', 'objcpp'],
         \ })
   function! s:on_lsp_buffer_enabled() abort

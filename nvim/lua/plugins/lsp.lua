@@ -47,6 +47,9 @@ local on_attach = function(client, bufnr)
     end, buffer_options)
 
     vim.keymap.set('n', '<leader>a', '<cmd>ClangdSwitchSourceHeader<CR>', {})
+    vim.keymap.set('n', '<leader>f', function()
+        vim.lsp.buf.format { async = true }
+    end, buffer_options)
 end
 
 -- border settings
