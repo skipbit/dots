@@ -1,17 +1,4 @@
 
---[[ normal mode ]]--
-
-vim.keymap.set('n', 'J', "mzJz")
-vim.keymap.set('n', '<C-d>', "<C-d>zz")
-vim.keymap.set('n', '<C-u>', "<C-u>zz")
-vim.keymap.set('n', 'n', "nzzzv")
-vim.keymap.set('n', 'N', "Nzzzv")
-
---[[ visual mode ]]--
-
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
-
 --[[ terminal mode ]]--
 
 vim.keymap.set('t', '<C-w>N', '<C-\\><C-n>')
