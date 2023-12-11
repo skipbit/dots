@@ -21,3 +21,6 @@ if type brew > /dev/null 2>&1; then
 	fpath=("$(brew --prefix)/share/zsh/site-functions"(N-/) $fpath)
 fi
 
+# Linux Tools
+path=($path $HOME/.local/bin(N-/))
+
