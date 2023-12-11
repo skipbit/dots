@@ -15,7 +15,6 @@ local lazy_options = {
 
 return require('lazy').setup({
     -- general
-    'vim-jp/vimdoc-ja',
     'vim-jp/cpp-vim',
     'editorconfig/editorconfig-vim',
 
