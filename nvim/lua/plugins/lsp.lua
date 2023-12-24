@@ -80,3 +80,10 @@ lspconfig.pylsp.setup({
     on_attach = on_attach,
     flags = { debounce_text_changes = 150 },
 })
+
+-- lua
+lspconfig.lua_ls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = { debounce_text_changes = 150 },
+})

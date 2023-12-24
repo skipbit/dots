@@ -22,6 +22,7 @@ mason_lspconfig.setup({
         'clangd',
         'cmake',
         'rust_analyzer',
+        'lua_ls',
     },
     automatic_installation = true,
 })
