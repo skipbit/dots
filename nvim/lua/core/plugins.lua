@@ -65,6 +65,7 @@ return require('lazy').setup({
                     end,
                 },
                 { 'nvim-telescope/telescope-dap.nvim' },
+                { 'nvim-telescope/telescope-ui-select.nvim' },
             },
         },
         -- files

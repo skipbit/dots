@@ -107,4 +107,5 @@ vim.keymap.set('n', '<leader>//', builtin.commands, {})
 
 telescope.load_extension('fzf')
 telescope.load_extension('dap')
+telescope.load_extension('ui-select')
 
