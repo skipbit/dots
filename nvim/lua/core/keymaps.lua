@@ -17,3 +17,13 @@ vim.keymap.set('t', '<C-w>|', '<Cmd>wincmd |<CR>', { silent = true })
 vim.keymap.set('t', '<C-w>_', '<Cmd>wincmd _<CR>', { silent = true })
 vim.keymap.set('t', '<C-w>=', '<Cmd>wincmd =<CR>', { silent = true })
 
+--[[ copilot ]]--
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.keymap.set('i', '<C-j>', '<Plug>(copilot-next)')
+vim.keymap.set('i', '<C-k>', '<Plug>(copilot-previous)')
+vim.keymap.set('i', '<C-o>', '<Plug>(copilot-dismiss)')
+vim.keymap.set('i', '<C-s>', '<Plug>(copilot-suggest)')
+vim.keymap.set('i', '<C-g>', 'copilot#Accept("<CR>")', { silent = true, expr = true, script = true, replace_keycodes = false })
+vim.keymap.set('i', '<C-W>', '<Plug>(copilot-accept-word)', { silent = true })
+vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-line)', { silent = true })

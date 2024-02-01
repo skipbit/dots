@@ -96,4 +96,9 @@ return require('lazy').setup({
             { 'Mofiqul/dracula.nvim' },
         },
     },
+
+    --[[ advanced ]]--
+    {
+        { 'github/copilot.vim', lazy = false },
+    },
 }, lazy_options)
