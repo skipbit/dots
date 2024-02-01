@@ -96,4 +96,14 @@ return require('lazy').setup({
             { 'Mofiqul/dracula.nvim' },
         },
     },
+
+    --[[ advanced ]]--
+    {
+        { 'zbirenbaum/copilot.lua', cmd = 'Copilot', event = 'InsertEnter' },
+        {
+            'zbirenbaum/copilot-cmp', config = function()
+                require('copilot_cmp').setup({})
+            end,
+        }
+    }
 }, lazy_options)

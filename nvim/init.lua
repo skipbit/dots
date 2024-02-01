@@ -14,6 +14,7 @@ require 'plugins.telescope'
 require 'plugins.nvim-tree'
 require 'plugins.lualine'
 require 'plugins.git'
+require 'plugins.copilot'
 
 require 'core.options'
 require 'core.themes'
