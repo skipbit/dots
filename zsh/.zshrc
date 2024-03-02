@@ -44,11 +44,11 @@ zspecload compctl
 zspecload function
 zspecload module
 
-_resources=(screen fzf ssh bat zoxide)
+_resources=(screen fzf ssh bat zoxide node)
 for _rc in "${_resources[@]}"; do
 	_conf="${ZDOTDIR}/apps/universal/${_rc}.zsh"
 	if [ -f "${_conf}" ]; then
-		type "${_rc}" > /dev/null 2>&1 && source "${_conf}"
+		source "${_conf}"
 	fi
 done
 
