@@ -40,6 +40,7 @@ install-vim:
 	@ln -s $(SOURCE)/vimrc $(DESTINATION)/.vimrc
 	@mkdir $(DESTINATION)/.vim
 	@ln -s $(SOURCE)/vim-templates $(DESTINATION)/.vim/templates
+	@mkdir -p $(DESTINATION)/.config
 	@ln -s $(SOURCE)/nvim $(DESTINATION)/.config/nvim
 
 uninstall-vim:

@@ -31,6 +31,7 @@ return require('lazy').setup({
         {
             'mfussenegger/nvim-dap',
             'rcarriga/nvim-dap-ui',
+            'nvim-neotest/nvim-nio',
         },
         -- auto completion
         {
