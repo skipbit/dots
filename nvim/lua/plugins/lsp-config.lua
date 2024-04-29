@@ -114,25 +114,9 @@ return {
             local null_ls = require('null-ls')
             null_ls.setup({
                 sources = {
-                    null_ls.builtins.diagnostics.actionlint,           -- gh-actions
-                    null_ls.builtins.diagnostics.buf,                  -- protobuf
-                    null_ls.builtins.diagnostics.checkmake,            -- make
-                    null_ls.builtins.diagnostics.cmake_lint,           -- cmake
-                    null_ls.builtins.diagnostics.commitlint,           -- gitcomit
-                    null_ls.builtins.diagnostics.cppcheck,             -- cpp
-                    null_ls.builtins.diagnostics.editorconfig_checker, -- editorconfig
-                    null_ls.builtins.diagnostics.gccdiag,               -- cpp
-                    null_ls.builtins.diagnostics.hadolint,              -- dockerfile
-                    null_ls.builtins.diagnostics.markdownlint,          -- markdown
-                    null_ls.builtins.diagnostics.zsh,                   -- zsh
-                    null_ls.builtins.formatting.black,                  -- python
-                    null_ls.builtins.formatting.buf,                    -- protobuf
-                    null_ls.builtins.formatting.clang_format,           -- clang (c/c++)
-                    null_ls.builtins.formatting.cmake_format,           -- cmake
-                    null_ls.builtins.formatting.dart_format,            -- dart
-                    null_ls.builtins.formatting.gofmt,                  -- go
-                    null_ls.builtins.formatting.markdownlint,           -- markdown
-                    null_ls.builtins.formatting.stylua,                 -- lua
+                    null_ls.builtins.diagnostics.zsh,          -- zsh
+                    null_ls.builtins.formatting.clang_format,  -- clang (c/c++)
+                    null_ls.builtins.formatting.stylua,        -- lua
                     null_ls.builtins.hover.printenv,
                 }
             })
