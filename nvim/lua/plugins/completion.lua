@@ -46,7 +46,7 @@ return {
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<C-e>'] = cmp.mapping.abort(),
                     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                    ['<Tab>'] = cmp.mapping(function(fallback)
+                    ['<Tab>'] = cmp.mapping(function(_)
                         if cmp.visible() then
                             cmp.select_next_item()
                         elseif vim.fn['vsnip#available'](1) == 1 then

@@ -12,13 +12,17 @@ return {
     },
     {
         -- mason-lspconfig (language server)
-        'williamboman/mason-lspconfig.nvim', lazy = false, config = function ()
+        'williamboman/mason-lspconfig.nvim', lazy = false, opts = { auto_install = true, }, config = function ()
             require('mason-lspconfig').setup({
                 ensure_installed = {
+                    'bashls',
                     'clangd',
                     'cmake',
-                    'rust_analyzer',
+                    'dockerls',
+                    'eslint',
                     'lua_ls',
+                    'rust_analyzer',
+                    'tsserver',
                 },
                 automatic_installation = true,
             })
@@ -114,13 +118,14 @@ return {
             local null_ls = require('null-ls')
             null_ls.setup({
                 sources = {
+                    null_ls.builtins.diagnostics.actionlint,   -- zsh
                     null_ls.builtins.diagnostics.zsh,          -- zsh
                     null_ls.builtins.formatting.clang_format,  -- clang (c/c++)
+                    null_ls.builtins.formatting.prettier,      -- prettier (js, ts, html, etc)
                     null_ls.builtins.formatting.stylua,        -- lua
                     null_ls.builtins.hover.printenv,
                 }
             })
-            vim.keymap.set('n', '<leader>gf', vim.lsp.buf.format, {})
         end
     },
 }
