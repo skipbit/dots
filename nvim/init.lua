@@ -4,20 +4,20 @@ vim.g.mapleader = '\\'
 vim.g.maplocalleader = '\\'
 vim.g.editorconfig = true
 
-require 'core.plugins'
-require 'plugins.lsp'
-require 'plugins.dap'
-require 'plugins.mason'
-require 'plugins.completion'
-require 'plugins.treesitter'
-require 'plugins.telescope'
-require 'plugins.nvim-tree'
-require 'plugins.lualine'
-require 'plugins.git'
-require 'plugins.copilot'
+local lazy_path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not (vim.uv or vim.loop).fs_stat(lazy_path) then
+    vim.fn.system {
+        'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', '--branch=stable', lazy_path
+    }
+end
+vim.opt.rtp:prepend(lazy_path)
 
-require 'core.options'
-require 'core.themes'
-require 'core.terminal'
-require 'core.keymaps'
+local lazy_options = {
+    ui = {
+        border = 'rounded',
+    },
+}
+
+require('lazy').setup("plugins", lazy_options)
+require('options')
 

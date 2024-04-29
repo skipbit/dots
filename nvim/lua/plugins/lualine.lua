@@ -1,12 +1,12 @@
 
-local status, lualine = pcall(require, 'lualine')
-if not status then
-    return
-end
+return {
+    'nvim-lualine/lualine.nvim', config = function ()
+        require('lualine').setup({
+            options = {
+                icons_enabled = false,
+                theme = 'dracula',
+            }
+        })
+    end
+}
 
-lualine.setup({
-    options = {
-        icons_enabled = false,
-        theme = 'dracula',
-    },
-})
