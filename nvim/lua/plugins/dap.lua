@@ -60,23 +60,23 @@ return {
             end
 
             -- DAP Keymaps
-            vim.keymap.set('n', '<leader>dr', function() dap.continue() end)
-            vim.keymap.set('n', '<leader>d_', function() dap.run_last() end)
-            vim.keymap.set('n', '<leader>db', function() dap.set_breakpoint() end)
-            vim.keymap.set('n', '<leader>dB', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
-            vim.keymap.set('n', '<leader>dL', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
-            vim.keymap.set('n', '<leader>dh', function() dap.toggle_breakpoint() end)
-            vim.keymap.set('n', '<leader><C-k>', function() dap.step_out() end)
-            vim.keymap.set('n', '<leader><C-l>', function() dap.step_into() end)
-            vim.keymap.set('n', '<leader><C-j>', function() dap.step_over() end)
-            vim.keymap.set('n', '<leader>dq', function() dap.terminate() end)
+            vim.keymap.set('n', '<leader>dc', function() dap.continue() end, {})
+            vim.keymap.set('n', '<leader>dr', function() dap.run_last() end, {})
+            vim.keymap.set('n', '<leader>db', function() dap.set_breakpoint() end, {})
+            vim.keymap.set('n', '<leader>dB', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, {})
+            vim.keymap.set('n', '<leader>dL', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, {})
+            vim.keymap.set('n', '<leader>dt', function() dap.toggle_breakpoint() end, {})
+            vim.keymap.set('n', '<leader><C-k>', function() dap.step_out() end, {})
+            vim.keymap.set('n', '<leader><C-l>', function() dap.step_into() end, {})
+            vim.keymap.set('n', '<leader><C-j>', function() dap.step_over() end, {})
+            vim.keymap.set('n', '<leader>dq', function() dap.terminate() end, {})
 
-            vim.keymap.set('n', '<leader>di', function() dap.ui.variables.hover(function() return vim.fn.expand('<cexpr>') end) end)
-            vim.keymap.set('v', '<leader>di', function() dap.ui.variables.visual_hover() end)
-            vim.keymap.set('n', '<leader>d?', function() dap.ui.variables.scopes() end)
+            vim.keymap.set('n', '<leader>di', function() dap.ui.variables.hover(function() return vim.fn.expand('<cexpr>') end) end, {})
+            vim.keymap.set('v', '<leader>di', function() dap.ui.variables.visual_hover() end, {})
+            vim.keymap.set('n', '<leader>d?', function() dap.ui.variables.scopes() end, {})
 
-            vim.keymap.set('n', '<leader>dy', function() dapui.toggle() end)
-            vim.keymap.set('v', '<leader>dv', function() dapui.eval(vim.fn.expand('<cexpr>')) end)
+            vim.keymap.set('n', '<leader>dy', function() dapui.toggle() end, {})
+            vim.keymap.set('v', '<leader>dv', function() dapui.eval(vim.fn.expand('<cexpr>')) end, {})
         end
     }
 }
