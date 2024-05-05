@@ -7,6 +7,9 @@ return {
                 signcolumn = true,
                 numhl = true,
             })
+
+            vim.keymap.set('n', '<Space>gp', ':Gitsigns preview_hunk<CR>', {})
+            vim.keymap.set('n', '<Space>gt', ':Gitsigns toggle_current_line_blame<CR>', {})
         end
     },
     {
