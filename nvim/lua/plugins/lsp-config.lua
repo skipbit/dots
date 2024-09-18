@@ -23,7 +23,7 @@ return {
                     'lua_ls',
                     'pylsp',
                     'rust_analyzer',
-                    'tsserver',
+                    'ts_ls',
                 },
                 automatic_installation = true,
             })
