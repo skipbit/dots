@@ -8,6 +8,7 @@ install:
 	@make install-vim
 	@make install-screen
 	@make install-tmux
+	@make install-nix
 
 clean:
 	@mkdir $(DESTINATION)/.cleanup
@@ -16,6 +17,7 @@ clean:
 	@make uninstall-vim
 	@make uninstall-screen
 	@make uninstall-tmux
+	@make uninstall-nix
 
 install-zsh:
 	@[ ! -e $(DESTINATION)/.zsh ] && ln -s $(SOURCE)/zsh $(DESTINATION)/.zsh
@@ -64,4 +66,10 @@ install-tmux:
 uninstall-tmux:
 	@mv $(DESTINATION)/.tmux.conf $(DESTINATION)/.cleanup/
 	@mv $(DESTINATION)/.tmux $(DESTINATION)/.cleanup/
+
+install-nix:
+	@ln -s $(SOURCE)/nix $(DESTINATION)/.config/nix
+
+uninstall-nix:
+	@mv $(DESTINATION)/.config/nix $(DESTINATION)/.cleanup/
 
