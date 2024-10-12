@@ -24,7 +24,7 @@ autocmd('TermOpen', {
 
 -- ターミナルを閉じた時 (自動で閉じる)
 autocmd('TermClose', {
-    command = 'if !v:event.status | exe "bdelete! "..expand("<abuf>") | endif'
+    command = 'if &buftype == "terminal" && !v:event.status | exe "silent! bdelete!" | endif'
 })
 
 -- ターミナルに入った時
