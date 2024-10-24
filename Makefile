@@ -9,6 +9,7 @@ install:
 	@make install-screen
 	@make install-tmux
 	@make install-nix
+	@make install-wezterm
 
 clean:
 	@mkdir $(DESTINATION)/.cleanup
@@ -18,6 +19,7 @@ clean:
 	@make uninstall-screen
 	@make uninstall-tmux
 	@make uninstall-nix
+	@make uninstall-wezterm
 
 install-zsh:
 	@[ ! -e $(DESTINATION)/.zsh ] && ln -s $(SOURCE)/zsh $(DESTINATION)/.zsh
@@ -72,4 +74,10 @@ install-nix:
 
 uninstall-nix:
 	@mv $(DESTINATION)/.config/nix $(DESTINATION)/.cleanup/
+
+install-wezterm:
+	@ln -s $(SOURCE)/wezterm $(DESTINATION)/.config/wezterm
+
+uninstall-wezterm:
+	@mv $(DESTINATION)/.config/wezterm $(DESTINATION)/.cleanup/
 
