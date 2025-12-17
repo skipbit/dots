@@ -33,10 +33,9 @@ return {
         -- nvim-lspconfig (language server)
         'neovim/nvim-lspconfig', lazy = false, config = function ()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            local lspconfig = require('lspconfig')
 
             local on_attach = function(_, bufnr)
-                vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+                vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
                 local buffer_options = { noremap = true, silent = true, buffer = bufnr }
                 vim.keymap.set('n', 'K', vim.lsp.buf.hover, buffer_options)
@@ -72,33 +71,16 @@ return {
                 end, buffer_options)
             end
 
-            -- clangd (C/C++)
-            lspconfig.clangd.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                flags = { debounce_text_changes = 150 },
-            })
-
-            -- rust_analyzer (Rust)
-            lspconfig.rust_analyzer.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                flags = { debounce_text_changes = 150 },
-            })
-
-            -- python-lsp-server (Python)
-            lspconfig.pylsp.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                flags = { debounce_text_changes = 150 },
-            })
-
-            -- lua
-            lspconfig.lua_ls.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                flags = { debounce_text_changes = 150 },
-            })
+            -- enable lsp
+            local lsp_servers = { 'clangd', 'rust_analyzer', 'pylsp', 'lua_ls' }
+            for _, server in ipairs(lsp_servers) do
+                vim.lsp.config(server, {
+                    capabilities = capabilities,
+                    on_attach = on_attach,
+                    flags = { debounce_text_changes = 150 },
+                })
+            end
+            vim.lsp.enable(lsp_servers)
 
             -- border settings
             local border_config = { border = 'rounded' }
