@@ -1,7 +1,7 @@
 
 return {
     {
-        { 'nvim-telescope/telescope-dap.nvim' },
+        { 'nvim-telescope/telescope-dap.nvim', dependencies = { 'mfussenegger/nvim-dap' } },
         { 'nvim-telescope/telescope-ui-select.nvim' },
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', cond = function()
                 return vim.fn.executable 'make' == 1
