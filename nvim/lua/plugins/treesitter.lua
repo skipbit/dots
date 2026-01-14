@@ -1,11 +1,14 @@
-
+-- nvim-treesitter configuration for Neovim 0.11+ (main branch)
+-- Highlighting uses Neovim's built-in vim.treesitter.start()
 return {
-    'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', dependencies = {
-        { 'nvim-treesitter/nvim-treesitter-textobjects' },
-    },
-    config = function()
-        require('nvim-treesitter.configs').setup({
-            ensure_installed = {
+    {
+        'nvim-treesitter/nvim-treesitter',
+        branch = 'main',
+        lazy = false,
+        build = ':TSUpdate',
+        config = function()
+            -- Install parsers
+            require('nvim-treesitter').install({
                 'bash',
                 'c',
                 'cpp',
@@ -17,19 +20,18 @@ return {
                 'vimdoc',
                 'dockerfile',
                 'git_config',
-            },
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-            },
-            indent = {
-                enable = true
-            },
-            autotag = {
-                enable = true
-            },
-            auto_install = true
-        })
-    end
+            })
+
+            -- Enable highlighting and indentation via FileType autocommand
+            vim.api.nvim_create_autocmd('FileType', {
+                callback = function(args)
+                    -- Enable treesitter highlighting (built-in Neovim feature)
+                    pcall(vim.treesitter.start, args.buf)
+                    -- Enable treesitter indentation
+                    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
+            })
+        end,
+    },
 }
 
