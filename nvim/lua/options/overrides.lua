@@ -46,3 +46,10 @@ vim.o.termguicolors = true
 vim.o.winblend = 0
 vim.o.pumblend = 0
 
+-- FILETYPES
+vim.filetype.add({
+    extension = {
+        cp = 'cpp',
+    },
+})
+

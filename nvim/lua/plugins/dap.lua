@@ -1,8 +1,7 @@
 
 return {
     {
-        'mfussenegger/nvim-dap',
-        dependencies = {
+        'mfussenegger/nvim-dap', dependencies = {
             -- UI
             'rcarriga/nvim-dap-ui',
             'nvim-neotest/nvim-nio',
@@ -38,12 +37,15 @@ return {
                     type = 'codelldb',
                     request = 'launch',
                     program = function()
-                        return vim.fn.input('Executable: ', vim.fn.getcwd() .. '/', 'file')
+                        local ok, path = pcall(vim.fn.input, 'Executable: ', vim.fn.getcwd() .. '/', 'file')
+                        if not ok or path == '' then return dap.ABORT end
+                        return path
                     end,
                     cwd = '${workspaceFolder}',
                     stopOnEntry = false,
                     args = function()
-                        local input = vim.fn.input('Arguments: ')
+                        local ok, input = pcall(vim.fn.input, 'Arguments: ')
+                        if not ok then return dap.ABORT end
                         return vim.split(input, ' ', { trimempty = true })
                     end,
                 },
@@ -75,14 +77,14 @@ return {
                             { id = 'watches', size = 0.2 },
                         },
                         size = 40,
-                        position = 'left',
+                        position = 'right',
                     },
                     {
                         elements = {
                             { id = 'repl', size = 0.5 },
                             { id = 'console', size = 0.5 },
                         },
-                        size = 10,
+                        size = 20,
                         position = 'bottom',
                     },
                 },
@@ -139,29 +141,39 @@ return {
             -- Breakpoints
             vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Debug: Toggle breakpoint' })
             vim.keymap.set('n', '<leader>dB', function()
-                dap.set_breakpoint(vim.fn.input('Condition: '))
+                local ok, cond = pcall(vim.fn.input, 'Condition: ')
+                if ok and cond ~= '' then
+                    dap.set_breakpoint(cond)
+                end
             end, { desc = 'Debug: Conditional breakpoint' })
-            vim.keymap.set('n', '<leader>dl', function()
-                dap.set_breakpoint(nil, nil, vim.fn.input('Log message: '))
+            vim.keymap.set('n', '<leader>dL', function()
+                local ok, msg = pcall(vim.fn.input, 'Log message: ')
+                if ok and msg ~= '' then
+                    dap.set_breakpoint(nil, nil, msg)
+                end
             end, { desc = 'Debug: Log point' })
             vim.keymap.set('n', '<leader>dx', dap.clear_breakpoints, { desc = 'Debug: Clear breakpoints' })
 
             -- UI
             vim.keymap.set('n', '<leader>du', dapui.toggle, { desc = 'Debug: Toggle UI' })
+            vim.keymap.set('n', '<leader>dU', function()
+                dapui.close()
+                dapui.open({ reset = true })
+            end, { desc = 'Debug: Refresh UI' })
             vim.keymap.set('n', '<leader>de', dapui.eval, { desc = 'Debug: Eval' })
             vim.keymap.set('v', '<leader>de', dapui.eval, { desc = 'Debug: Eval selection' })
 
-            -- Widgets (hover, scopes, etc.)
-            vim.keymap.set('n', '<leader>dh', widgets.hover, { desc = 'Debug: Hover' })
-            vim.keymap.set('v', '<leader>dh', widgets.hover, { desc = 'Debug: Hover selection' })
-            vim.keymap.set('n', '<leader>ds', function()
+            -- Widgets (hover, scopes, etc.): DO NOT USE
+            vim.keymap.set('n', '<leader>dH', widgets.hover, { desc = 'Debug: Hover' })
+            vim.keymap.set('v', '<leader>dH', widgets.hover, { desc = 'Debug: Hover selection' })
+            vim.keymap.set('n', '<leader>dV', function() -- Alternative: <leader>dv (telescope)
                 widgets.centered_float(widgets.scopes)
             end, { desc = 'Debug: Scopes' })
-            vim.keymap.set('n', '<leader>df', function()
+            vim.keymap.set('n', '<leader>dF', function() -- Alternative: <leader>df (telescope)
                 widgets.centered_float(widgets.frames)
             end, { desc = 'Debug: Frames' })
 
-            -- REPL
+            -- REPL: DO NOT USE
             vim.keymap.set('n', '<leader>dR', dap.repl.toggle, { desc = 'Debug: Toggle REPL' })
         end,
     },

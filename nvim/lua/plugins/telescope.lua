@@ -11,7 +11,9 @@ return {
         {
             'nvim-telescope/telescope-dap.nvim', dependencies = { 'mfussenegger/nvim-dap' }
         },
-        'nvim-telescope/telescope-ui-select.nvim',
+        {
+            'nvim-telescope/telescope-ui-select.nvim',
+        },
     },
     config = function()
         local telescope = require('telescope')
@@ -57,6 +59,11 @@ return {
 
         local builtin = require('telescope.builtin')
 
+        -- Load extensions
+        telescope.load_extension('dap')
+        telescope.load_extension('fzf')
+        telescope.load_extension('ui-select')
+
         -- File pickers
         vim.keymap.set('n', '<leader><C-f>', builtin.find_files, {})
         vim.keymap.set('n', '<leader>zf', builtin.git_files, {})
@@ -82,7 +89,10 @@ return {
         -- Grep pickers
         vim.keymap.set('n', '<leader>z*', builtin.live_grep, {})
         vim.keymap.set('n', '<leader>z?', function()
-            builtin.grep_string({ search = vim.fn.input("Grep > ") });
+            local ok, search = pcall(vim.fn.input, "Grep > ")
+            if ok and search ~= '' then
+                builtin.grep_string({ search = search })
+            end
         end)
         vim.keymap.set('n', '<leader>zl', builtin.current_buffer_fuzzy_find, {})
         vim.keymap.set('n', '<leader>zt', builtin.current_buffer_tags, {})
@@ -110,9 +120,21 @@ return {
         vim.keymap.set('n', '<leader>??', builtin.builtin, {})
         vim.keymap.set('n', '<leader>//', builtin.commands, {})
 
-        -- Load extensions
-        telescope.load_extension('fzf')
-        telescope.load_extension('dap')
-        telescope.load_extension('ui-select')
+        -- DAP pickers
+        local dap_telescope = telescope.extensions.dap
+        local function require_dap_session(fn)
+            return function()
+                if require('dap').session() then
+                    fn()
+                else
+                    vim.notify('No active debug session', vim.log.levels.WARN)
+                end
+            end
+        end
+        vim.keymap.set('n', '<leader>d?', dap_telescope.commands, { desc = 'Debug: Commands' })
+        vim.keymap.set('n', '<leader>dl', dap_telescope.list_breakpoints, { desc = 'Debug: List Breakpoints' })
+        vim.keymap.set('n', '<leader>dv', require_dap_session(dap_telescope.variables), { desc = 'Debug: Variables' })
+        vim.keymap.set('n', '<leader>df', require_dap_session(dap_telescope.frames), { desc = 'Debug: Frames' })
+        vim.keymap.set('n', '<leader>dD', dap_telescope.configurations, { desc = 'Debug: configurations' })
     end
 }
