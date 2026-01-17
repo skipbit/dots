@@ -77,7 +77,7 @@ return {
                             { id = 'watches', size = 0.2 },
                         },
                         size = 40,
-                        position = 'right',
+                        position = 'left',
                     },
                     {
                         elements = {
@@ -175,6 +175,42 @@ return {
 
             -- REPL: DO NOT USE
             vim.keymap.set('n', '<leader>dR', dap.repl.toggle, { desc = 'Debug: Toggle REPL' })
+
+            ---------------------------------------------------------------------------
+            -- Session-only keymaps (active only during debug session)
+            ---------------------------------------------------------------------------
+
+            local session_keymaps = {
+                { 'n', '<M-Down>', dap.step_over, 'Debug: Step over' },
+                { 'n', '<M-Right>', dap.step_into, 'Debug: Step into' },
+                { 'n', '<M-Left>', dap.step_out, 'Debug: Step out' },
+                { 'n', '<M-Up>', dap.continue, 'Debug: Continue' },
+            }
+
+            local function set_session_keymaps()
+                for _, map in ipairs(session_keymaps) do
+                    vim.keymap.set(map[1], map[2], map[3], { desc = map[4], buffer = 0 })
+                end
+            end
+
+            local function clear_session_keymaps()
+                for _, map in ipairs(session_keymaps) do
+                    pcall(vim.keymap.del, map[1], map[2], { buffer = 0 })
+                end
+            end
+
+            -- Set keymaps when stopped at breakpoint/step
+            dap.listeners.after.event_stopped.session_keymaps = function()
+                set_session_keymaps()
+            end
+
+            -- Clear keymaps when session ends
+            dap.listeners.before.event_terminated.session_keymaps = function()
+                clear_session_keymaps()
+            end
+            dap.listeners.before.event_exited.session_keymaps = function()
+                clear_session_keymaps()
+            end
         end,
     },
 }
