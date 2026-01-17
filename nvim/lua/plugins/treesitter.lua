@@ -7,7 +7,11 @@ return {
         lazy = false,
         build = ':TSUpdate',
         config = function()
-            -- Install parsers
+            -- Configure nvim-treesitter
+            require('nvim-treesitter').setup({
+                install_dir = vim.fn.stdpath('data') .. '/treesitter',
+            })
+
             require('nvim-treesitter').install({
                 'bash',
                 'c',
