@@ -14,6 +14,9 @@ return {
         {
             'nvim-telescope/telescope-ui-select.nvim',
         },
+        {
+            'LukasPietzschmann/telescope-tabs',
+        },
     },
     config = function()
         local telescope = require('telescope')
@@ -70,7 +73,6 @@ return {
 
         -- Vim pickers
         vim.keymap.set('n', '<leader>zb', builtin.buffers, {})
-        vim.keymap.set('n', '<leader>zT', builtin.tags, {})
         vim.keymap.set('n', '<leader>zh', builtin.oldfiles, {})
         vim.keymap.set('n', '<leader>z:', builtin.command_history, {})
         vim.keymap.set('n', '<leader>z/', builtin.search_history, {})
@@ -95,7 +97,6 @@ return {
             end
         end)
         vim.keymap.set('n', '<leader>zl', builtin.current_buffer_fuzzy_find, {})
-        vim.keymap.set('n', '<leader>zt', builtin.current_buffer_tags, {})
 
         -- Git pickers
         vim.keymap.set('n', '<leader>zG', builtin.git_commits, {})
@@ -136,5 +137,11 @@ return {
         vim.keymap.set('n', '<leader>dv', require_dap_session(dap_telescope.variables), { desc = 'Debug: Variables' })
         vim.keymap.set('n', '<leader>df', require_dap_session(dap_telescope.frames), { desc = 'Debug: Frames' })
         vim.keymap.set('n', '<leader>dD', dap_telescope.configurations, { desc = 'Debug: configurations' })
+
+        -- Tab picker
+        local telescope_tabs = require('telescope-tabs')
+        telescope_tabs.setup()
+        vim.keymap.set('n', '<leader>zt', telescope_tabs.list_tabs, {})
+        vim.keymap.set('n', '<leader>zT', telescope_tabs.go_to_previous, {})
     end
 }
