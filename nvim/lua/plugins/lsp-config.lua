@@ -17,7 +17,7 @@ return {
                 ensure_installed = {
                     'bashls',
                     'clangd',
-                    'cmake',
+                    'neocmake',
                     'dockerls',
                     'eslint',
                     'lua_ls',
@@ -72,7 +72,7 @@ return {
             end
 
             -- enable lsp
-            local lsp_servers = { 'clangd', 'rust_analyzer', 'pylsp', 'lua_ls' }
+            local lsp_servers = { 'clangd', 'rust_analyzer', 'pylsp', 'lua_ls', 'neocmake' }
             for _, server in ipairs(lsp_servers) do
                 vim.lsp.config(server, {
                     capabilities = capabilities,
