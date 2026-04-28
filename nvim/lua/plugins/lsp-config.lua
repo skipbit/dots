@@ -83,13 +83,8 @@ return {
             vim.lsp.enable(lsp_servers)
 
             -- border settings
-            local border_config = { border = 'rounded' }
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, border_config)
-            vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, border_config)
-            vim.diagnostic.config {
-                float = border_config
-            }
-            require('lspconfig.ui.windows').default_options.border = 'rounded'
+            vim.o.winborder = 'rounded'
+            vim.diagnostic.config { float = { border = 'rounded' } }
 
             -- other settings
             vim.opt.signcolumn = 'yes'
