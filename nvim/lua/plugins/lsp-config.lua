@@ -34,7 +34,7 @@ return {
         'neovim/nvim-lspconfig', lazy = false, config = function ()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-            local on_attach = function(_, bufnr)
+            local on_attach = function(client, bufnr)
                 vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
                 local buffer_options = { noremap = true, silent = true, buffer = bufnr }
@@ -65,18 +65,28 @@ return {
                     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
                 end, buffer_options)
 
-                vim.keymap.set('n', '<leader>a', '<cmd>ClangdSwitchSourceHeader<CR>', {})
+                if client.name == 'clangd' then
+                    vim.keymap.set('n', '<leader>a', '<cmd>LspClangdSwitchSourceHeader<CR>', buffer_options)
+                end
                 vim.keymap.set('n', '<leader>f', function()
                     vim.lsp.buf.format { async = true }
                 end, buffer_options)
             end
+
+            -- attach keymaps here, not via vim.lsp.config's on_attach: that field would
+            -- replace the server's own on_attach, and clangd's is what defines
+            -- LspClangdSwitchSourceHeader.
+            vim.api.nvim_create_autocmd('LspAttach', {
+                callback = function(event)
+                    on_attach(vim.lsp.get_client_by_id(event.data.client_id), event.buf)
+                end,
+            })
 
             -- enable lsp
             local lsp_servers = { 'clangd', 'rust_analyzer', 'pylsp', 'lua_ls', 'neocmake' }
             for _, server in ipairs(lsp_servers) do
                 vim.lsp.config(server, {
                     capabilities = capabilities,
-                    on_attach = on_attach,
                     flags = { debounce_text_changes = 150 },
                 })
             end
