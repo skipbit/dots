@@ -1,44 +1,33 @@
 #!/bin/bash
+#
+# tmux の pane-border-format から呼ばれ、リポジトリ名・ブランチ名・変更状態を出す。
+# ロケールに依存しない方法だけを使う(git の表示メッセージを解析しない)。
 
-if git_status="$(cd "${1}" && git status 2>/dev/null)"; then
-    #git_repository="$(cd "${1}" && basename "$(git rev-parse --show-toplevel)")"
+cd "${1}" 2>/dev/null || { echo ""; exit 0; }
+git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo ""; exit 0; }
 
-    git_remote="$(cd "${1}" && git config --get remote.origin.url)"
-    git_repository="${git_remote#*github.com?}"
-    git_identifier="${git_repository%*.git}"
+# リポジトリ名: remote の URL から
+git_remote="$(git config --get remote.origin.url)"
+git_repository="${git_remote#*github.com?}"
+git_identifier="${git_repository%*.git}"
 
-    if [[ "${git_status}" =~ "detached" ]]; then
-        git_branch="$(echo "${git_status}" | awk 'NR==1 {print $4}')"
-    else
-        git_branch="$(echo "${git_status}" | awk 'NR==1 {print $3}')"
-    fi
-    case "${git_status}" in
-        *Changes\ not\ staged* )
-            #state="#[bg=colour009,fg=white] ± #[fg=default]"
-            state=" ± "
-            ;;
-        *Changes\ to\ be\ committed* )
-            #state="#[bg=colour190,fg=black] + #[default]"
-            state=" + "
-            ;;
-        *Untracked\ files* )
-            #state="#[bg=colour227,fg=black] ? #[default]"
-            state=" ? "
-            ;;
-        * )
-            #state="#[bg=colour006,fg=black] ✔ #[default]"
-            #state=" ✔ "
-            state=" - "
-            ;;
-    esac
-    git_info="#[bg=black,fg=colour014] [${git_branch}] #[default]${state}"
+# ブランチ名: git branch --show-current はロケール非依存。
+# 切り離し(detached HEAD)のときは空文字を返すので、短い commit id で代替する。
+git_branch="$(git branch --show-current)"
+[ -z "${git_branch}" ] && git_branch="$(git rev-parse --short HEAD 2>/dev/null)"
 
-    #directory="#[underscore]#[bg=black,fg=cyan]$1#[default]"
-    #echo "${directory}${git_info}"
-    #echo "${git_identifier} [${git_branch}]${git_info}"
-
-    echo "${git_identifier} [${git_branch}]${state}"
+# 変更状態: --porcelain は機械可読の固定書式で、表示言語に左右されない。
+#   1桁目 = ステージ済みの状態 / 2桁目 = 未ステージの状態 / "??" = 未追跡
+# 優先順位は元のスクリプトと同じ(未ステージ > ステージ済み > 未追跡 > 変更なし)。
+porcelain="$(git status --porcelain 2>/dev/null)"
+if [ -z "${porcelain}" ]; then
+    state=" - "
+elif printf '%s\n' "${porcelain}" | grep -q '^.[MDARC]'; then
+    state=" ± "
+elif printf '%s\n' "${porcelain}" | grep -q '^[MADRC]'; then
+    state=" + "
 else
-    echo ""
+    state=" ? "
 fi
 
+echo "${git_identifier} [${git_branch}]${state}"
