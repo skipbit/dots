@@ -102,6 +102,28 @@ local function fit(resize)
     end
 end
 
+-- `:ClaudeCode` grabs focus whenever it opens the terminal. Keep the toggle
+-- about visibility alone and leave moving focus to <leader>wf.
+local function toggle_visibility()
+    local terminal = require('claudecode.terminal')
+    local buf = terminal.get_active_terminal_bufnr()
+
+    if buf then
+        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+            if vim.api.nvim_win_get_buf(win) == buf then
+                -- simple_toggle hides the window and keeps the buffer. terminal.close()
+                -- would run cleanup_state() and lose track of the running session, so
+                -- the next open would start a fresh one.
+                terminal.simple_toggle()
+                return
+            end
+        end
+    end
+
+    -- Shows a hidden terminal, or starts one, without leaving the current window.
+    terminal.ensure_visible()
+end
+
 -- `terminal.defaults` is the live config table the provider lookup reads on every
 -- call, so swapping `provider` there is enough. Calling `terminal.setup()` again
 -- would drop `terminal_cmd`, which it only takes as a positional argument.
@@ -136,7 +158,7 @@ return {
         'ClaudeCodeCloseAllDiffs',
     },
     keys = {
-        { '<leader>wc', '<cmd>ClaudeCode<CR>', desc = 'Claude: Toggle' },
+        { '<leader>wc', toggle_visibility, desc = 'Claude: Toggle' },
         { '<leader>wf', '<cmd>ClaudeCodeFocus<CR>', desc = 'Claude: Focus' },
         { '<leader>wr', '<cmd>ClaudeCode --resume<CR>', desc = 'Claude: Resume' },
         { '<leader>wC', '<cmd>ClaudeCode --continue<CR>', desc = 'Claude: Continue' },
