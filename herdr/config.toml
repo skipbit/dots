@@ -34,6 +34,9 @@ auto_switch = false
 #   ※ [ui] の accent は別物で、分割線には効かない (実測)。
 # 他に sidebar_bg / active_row_bg / selection_bg / surface_dim / panel_bg / red / green / yellow。
 accent = "#8be9fd"
+# navigate モード (<prefix> w / g) で選択中の行。terminal テーマは既定だと
+# 実質透明で、選択が太字だけの差になって見えないので明示的に敷く。
+selection_bg = "#005f87"
 
 [keys]
 # tmux と同じ prefix。C-b はシェルの後方移動に使うので空けておく。
@@ -89,8 +92,10 @@ next_agent = "prefix+alt+j"
 # height = "80%"
 
 [ui]
-# tmux 風の枠。外周は描かず、分割線だけを引く。
-pane_outer_borders = false
+# pane 領域の外周にも枠を描く (herdr の既定)。
+# false にすると tmux と同じく内側の分割線だけになる。
+pane_outer_borders = true
+# 分割線を共有して詰めて並べる。true にすると pane の間に隙間が空く (herdr の既定)。
 pane_gaps = false
 
 # tmux の pane-border-format 相当。pane に名前を付けていないときは
@@ -100,11 +105,12 @@ show_agent_labels_on_pane_borders = true
 # tmux の <prefix> c と同じく、名前を聞かずにタブを作る。
 prompt_new_tab_name = false
 
-# tmux の status-right と同じ並び。タブバーの位置は既定で top (status-position top)。
+# タブバー右端。zoom 中の pane がある印と、ホスト名を出す。
+# 空 [] にすると何も出ない (herdr の既定)。
+# 他に置けるのは datetime / text / command。
 tab_bar_right = [
     { type = "zoom" },
     { type = "hostname" },
-    { type = "datetime", format = "%Y-%m-%d (%a) %H:%M" },
 ]
 
 # マウスは herdr 側が掴む既定のまま (mouse UI と選択即コピーが使える)。
