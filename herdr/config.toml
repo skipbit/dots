@@ -20,8 +20,6 @@ onboarding = false                     # 既定: true
 # <prefix> ;        直前の pane
 # <prefix> [        コピーモード    herdr の既定が既に同じ (vi キーも最初から入っている)
 # <prefix> d        デタッチ
-# <prefix> ,        タブ名変更      tmux の rename-window
-# <prefix> $        workspace 改名  tmux の rename-session
 # <prefix> ( )      workspace 巡回  tmux のセッション切り替え
 # <prefix> c n p 1-9 x z ?          herdr の既定が既に tmux と同じ
 
@@ -49,9 +47,6 @@ prefix = "ctrl+q"                      # 既定: "ctrl+b"
 # --- tmux に合わせて振り直すもの ---
 detach = "prefix+d"                    # 既定: "prefix+q"
 copy_mode = "prefix+["                 # 既定: "prefix+[" (同じ。tmux と一致するので明示)
-rename_tab = "prefix+,"                # 既定: "prefix+shift+t"   tmux の rename-window
-rename_workspace = "prefix+$"          # 既定: "prefix+shift+w"   tmux の rename-session
-                                       #   herdr の workspace は tmux のセッションに相当する
 split_vertical = "prefix+\\"           # 既定: "prefix+v"   左右分割。API 上は direction=right
 split_horizontal = "prefix+minus"      # 既定: "prefix+minus" (同じ。上の行と対で読めるように明示)
 last_pane = "prefix+;"                 # 既定: 未設定   tmux の直前 pane
@@ -65,12 +60,8 @@ previous_workspace = "prefix+("        # 既定: 未設定   tmux のセッシ�
 next_workspace = "prefix+)"            # 既定: 未設定
 
 # --- herdr 固有。既定では未割り当てなので有効化する ---
-# alt は端末によっては届かないことがある。効かなければ別の修飾に変える。
-switch_workspace = "prefix+shift+1..9" # 既定: 未設定   workspace を番号で選ぶ。
-                                       #   JIS 配列では 2 6 7 8 9 が別の文字になり届かない
-focus_agent = "prefix+alt+1..9"        # 既定: 未設定   サイドバーのエージェント行へ直接飛ぶ
-previous_agent = "prefix+alt+k"        # 既定: 未設定
-next_agent = "prefix+alt+j"            # 既定: 未設定
+previous_agent = "prefix+ctrl+p"       # 既定: 未設定   タブの p / n と同じ意味を一段深いレイヤーで
+next_agent = "prefix+ctrl+n"           # 既定: 未設定
 
 # --- 既定のまま使うもの (上書きしない) ---
 #   prefix+?          ヘルプ
@@ -81,14 +72,21 @@ next_agent = "prefix+alt+j"            # 既定: 未設定
 #   prefix+z          zoom                tmux と同じ
 #   prefix+tab        pane 循環           tmux の <prefix> o に相当
 #   prefix+o          通知元へジャンプ    herdr 固有。tmux の <prefix> o とは別物なので潰さない
-#   prefix+w          workspace picker    tmux の <prefix> w (ウィンドウ一覧) に近い感覚
-#   prefix+g          移動モード          h j k l で pane、上下で workspace (確定は Enter)
+#   prefix+w          navigate モード     上下で workspace、tab で pane、g でナビゲーターへ。
+#                     矢印は選択を動かすだけで、確定は Enter
+#   prefix+g          ナビゲーター        workspace / pane / エージェントの検索付きピッカー。
+#                     j k ↑↓ で選択、enter で移動、/ で検索、b w i d a で状態を絞る。
+#                     エージェントを選ぶ手段はここ。数字で直接飛ぶ focus_agent と
+#                     switch_workspace は割り当てない (ctrl+数字 は拡張キー必須、
+#                     shift+数字 は JIS 配列で 2 6 7 8 9 が届かない、alt は指に無理)
 #   prefix+e          スクロールバックを $EDITOR で開く   herdr 固有
 #   prefix+b          サイドバー開閉
 #   prefix+r          リサイズモード      (tmux で設定リロードに使う位置なので注意)
 #   prefix+shift+r    設定リロード
 #   prefix+shift+n    新規 workspace
 #   prefix+shift+g    新規 worktree
+#   prefix+shift+w    workspace 名変更    rename は herdr の流儀 (w / t / p) で揃える
+#   prefix+shift+t    タブ名変更
 #   prefix+shift+p    pane 名変更
 #   prefix+shift+x    タブを閉じる        tmux の <prefix> & に寄せるなら close_tab = "prefix+&"
 #   prefix+shift+d    workspace を閉じる
