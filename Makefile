@@ -10,6 +10,7 @@ install:
 	@make install-tmux
 	@make install-nix
 	@make install-wezterm
+	@make install-herdr
 
 clean:
 	@mkdir $(DESTINATION)/.cleanup
@@ -20,6 +21,7 @@ clean:
 	@make uninstall-tmux
 	@make uninstall-nix
 	@make uninstall-wezterm
+	@make uninstall-herdr
 
 install-zsh:
 	@[ ! -e $(DESTINATION)/.zsh ] && ln -s $(SOURCE)/zsh $(DESTINATION)/.zsh
@@ -81,3 +83,9 @@ install-wezterm:
 uninstall-wezterm:
 	@mv $(DESTINATION)/.config/wezterm $(DESTINATION)/.cleanup/
 
+install-herdr:
+	@mkdir -p $(DESTINATION)/.config/herdr
+	@ln -s $(SOURCE)/herdr/config.toml $(DESTINATION)/.config/herdr/config.toml
+
+uninstall-herdr:
+	@mv $(DESTINATION)/.config/herdr/config.toml $(DESTINATION)/.cleanup/

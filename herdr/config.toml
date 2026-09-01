@@ -1,0 +1,131 @@
+onboarding = false
+# herdr <https://herdr.dev/docs/>
+#
+# 既定値の全文は `herdr --default-config` で出る。ここに書くのは
+#   (1) tmux の身体記憶に合わせるための差分
+#   (2) herdr 固有の機能のうち、既定では無効になっているもの
+# だけにして、書かなかった項目は herdr の既定に追随させる。
+#
+# 検証 ... herdr config check       (未知キー・不正なキー名をその場で指摘する)
+# 反映 ... herdr server reload-config / <prefix> R
+#
+# [tmux からの対応表]
+# <prefix>          C-q             tmux と同じ
+# <prefix> \        左右分割        tmux: bind \ split-window -h
+# <prefix> -        上下分割        tmux: bind - split-window -v
+# <prefix> h j k l  pane 移動       herdr の既定が既に同じ
+# <prefix> H J K L  pane リサイズ   tmux: resize-pane (herdr のリサイズモード <prefix> r も残してある)
+# <prefix> ;        直前の pane
+# <prefix> [        コピーモード
+# <prefix> d        デタッチ
+# <prefix> ,        タブ名変更      tmux の rename-window
+# <prefix> c n p 1-9 x z ?          herdr の既定が既に tmux と同じ
+
+[theme]
+# name は設定画面 (<prefix> s) からも変更でき、herdr がこのファイルに書き戻す。
+# 選べるのは catppuccin / terminal / tokyo-night / dracula / nord /
+# gruvbox / one-dark / solarized / kanagawa / rose-pine / vesper。
+name = "terminal"
+auto_switch = false
+
+[theme.custom]
+# ベーステーマの色トークンを個別に上書きする。
+# accent = pane の分割線 (フォーカスしている pane に接する線) と各種ハイライト。
+#   ※ [ui] の accent は別物で、分割線には効かない (実測)。
+# 他に sidebar_bg / active_row_bg / selection_bg / surface_dim / panel_bg / red / green / yellow。
+accent = "#8be9fd"
+
+[keys]
+# tmux と同じ prefix。C-b はシェルの後方移動に使うので空けておく。
+prefix = "ctrl+q"
+
+# --- tmux に合わせて振り直すもの (括弧内は herdr の既定) ---
+detach = "prefix+d"                    # (prefix+q)
+copy_mode = "prefix+["                 # tmux の copy-mode
+rename_tab = "prefix+,"                # (prefix+shift+t) tmux の rename-window
+split_vertical = "prefix+\\"           # (prefix+v) 左右分割。API 上は direction=right
+split_horizontal = "prefix+minus"      # 既定と同じ。上下分割 = direction=down
+last_pane = "prefix+;"                 # (未設定) tmux の直前 pane
+resize_pane_left = "prefix+shift+h"    # (未設定) tmux の <prefix> H J K L。
+resize_pane_down = "prefix+shift+j"    #   herdr のリサイズモード (prefix+r) も既定のまま残る
+resize_pane_up = "prefix+shift+k"
+resize_pane_right = "prefix+shift+l"
+swap_pane_left = "prefix+{"            # (未設定) tmux の <prefix> { }。herdr のそれは方向指定
+swap_pane_right = "prefix+}"
+
+# --- herdr 固有。既定では未割り当てなので有効化する ---
+# alt は端末によっては届かないことがある。効かなければ別の修飾に変える。
+switch_workspace = "prefix+shift+1..9"  # workspace を番号で選ぶ
+focus_agent = "prefix+alt+1..9"         # サイドバーのエージェント行へ直接飛ぶ
+previous_agent = "prefix+alt+k"
+next_agent = "prefix+alt+j"
+
+# --- 既定のまま使うもの (上書きしない) ---
+#   prefix+?          ヘルプ
+#   prefix+c          新規タブ            tmux と同じ
+#   prefix+n / p      次/前のタブ         tmux と同じ
+#   prefix+1..9       タブ選択            tmux と同じ
+#   prefix+x          pane を閉じる       tmux と同じ
+#   prefix+z          zoom                tmux と同じ
+#   prefix+tab        pane 循環           tmux の <prefix> o に相当
+#   prefix+o          通知元へジャンプ    herdr 固有。tmux の <prefix> o とは別物なので潰さない
+#   prefix+w          workspace picker    tmux の <prefix> w (ウィンドウ一覧) に近い感覚
+#   prefix+g          移動モード          h j k l で pane、上下で workspace
+#   prefix+e          スクロールバックを $EDITOR で開く   herdr 固有
+#   prefix+b          サイドバー開閉
+#   prefix+r          リサイズモード      (tmux で設定リロードに使う位置なので注意)
+#   prefix+shift+r    設定リロード
+#   prefix+shift+n    新規 workspace
+#   prefix+shift+g    新規 worktree
+#   prefix+shift+x    タブを閉じる        tmux の <prefix> & に寄せるなら close_tab = "prefix+&"
+#   prefix+shift+d    workspace を閉じる
+
+# tmux の display-popup 相当。レイアウトを崩さずに一時的な pane を出せる。
+# [[keys.command]]
+# key = "prefix+alt+g"
+# type = "popup"
+# command = "tig status"
+# width = "80%"
+# height = "80%"
+
+[ui]
+# tmux 風の枠。外周は描かず、分割線だけを引く。
+pane_outer_borders = false
+pane_gaps = false
+
+# tmux の pane-border-format 相当。pane に名前を付けていないときは
+# 検出したエージェント名が枠に出る。
+show_agent_labels_on_pane_borders = true
+
+# tmux の <prefix> c と同じく、名前を聞かずにタブを作る。
+prompt_new_tab_name = false
+
+# tmux の status-right と同じ並び。タブバーの位置は既定で top (status-position top)。
+tab_bar_right = [
+    { type = "zoom" },
+    { type = "hostname" },
+    { type = "datetime", format = "%Y-%m-%d (%a) %H:%M" },
+]
+
+# マウスは herdr 側が掴む既定のまま (mouse UI と選択即コピーが使える)。
+# tmux (マウス無効) の感覚に戻すなら以下を有効にする。
+# mouse_capture = false
+# copy_on_select = false
+
+[ui.toast]
+# 背景 workspace のエージェントが止まったことに気付けるようにする。
+# "terminal" / "system" にすると OS の通知に飛ばせる。
+delivery = "herdr"
+
+[update]
+# Homebrew で入れているので、herdr 自身の更新チェックはしない (brew upgrade herdr で上げる)。
+# エージェント検出定義 (manifest_check) の更新はバイナリと無関係なので既定のまま残す。
+version_check = false
+
+[experimental]
+# 日本語入力まわり。どちらも macOS 向けで、Linux では実質無視される。
+#   prefix 中だけ ASCII 入力へ切り替える / 変換候補ウィンドウが
+#   TUI の描くカーソルを見失わないようにする (対象は claude の pane だけに絞る)。
+switch_ascii_input_source_in_prefix = true
+reveal_hidden_cursor_for_cjk_ime = true
+cjk_ime_agents = ["claude"]
