@@ -4,9 +4,9 @@ if type brew > /dev/null 2>&1; then
 
     cppflags=(); ldflags=()
     for p in $(ls ${HOMEBREW_PREFIX}/Cellar); do
-        formula="${HOMEBREW_PREFIX}/Library/Taps/homebrew/homebrew-core/Formula/${p}.rb"
+        formula="${HOMEBREW_PREFIX}/opt/${p}/.brew/${p}.rb"
         # path, pkg_config_path
-        if [ -f "${formula}" ] && grep 'keg_only' "${formula}"  > /dev/null; then
+        if [ -f "${formula}" ] && [[ "$(<${formula})" == *keg_only* ]]; then
             path=($path "${HOMEBREW_PREFIX}/opt/${p}/bin"(N-/))
         fi
         pkg_config_path=($pkg_config_path "${HOMEBREW_PREFIX}/opt/${p}/lib/pkgconfig"(N-/))

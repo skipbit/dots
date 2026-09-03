@@ -13,7 +13,7 @@ else
 fi
 
 # Appendix application
-config=(homebrew docker-x11)
+config=(docker-x11)
 for _config in "${config[@]}"; do
     zappload "${_config}"
 done

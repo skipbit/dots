@@ -26,8 +26,9 @@ function zappload() {
 	if [ ! -z ${name} ]; then
         local folders=(core "$(uname -s | tr '[:upper:]' '[:lower:]')" "$(hostname -s)")
 		for folder in "${folders[@]}"; do
-            if [ -d "${ZDOTDIR}/apps/${folder}" ]; then
-    			source "${ZDOTDIR}/apps/${folder}/${name}.zsh"
+            local APPSPEC="${ZDOTDIR}/apps/${folder}/${name}.zsh"
+            if [ -f "${APPSPEC}" ]; then
+                source "${APPSPEC}"
             fi
 		done
 	fi
