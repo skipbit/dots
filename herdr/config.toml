@@ -125,6 +125,7 @@ tab_bar_right = [                      # 既定: [] (何も出さない)
 # mouse_capture = false                # 既定: true
 # copy_on_select = false               # 既定: true
 
+agent_panel_sort = "spaces"
 [ui.toast]
 # 背景 workspace のエージェントが止まったことに気付けるようにする。
 # "terminal" / "system" にすると OS の通知に飛ばせる。
