@@ -16,6 +16,10 @@ local lazy_options = {
     ui = {
         border = 'rounded',
     },
+    rocks = {
+        -- No plugin here requires luarocks, so skip the hererocks bootstrap.
+        enabled = false,
+    },
 }
 
 require('lazy').setup("plugins", lazy_options)

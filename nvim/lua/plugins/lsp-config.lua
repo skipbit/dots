@@ -4,6 +4,7 @@ return {
         -- mason
         'williamboman/mason.nvim', lazy = false, config = function ()
             require('mason').setup({
+                PATH = 'append',
                 ui = {
                     border = 'rounded',
                 }
