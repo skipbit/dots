@@ -29,7 +29,7 @@ clean:
 
 install-zsh:
 	@[ ! -e $(DESTINATION)/.zsh ] && ln -s $(SOURCE)/zsh $(DESTINATION)/.zsh
-	@[ ! -e $(DESTINATION)/.zshenv ] && ln -s $(DESTINATION)/.zsh/zshenv.default.zsh $(DESTINATION)/.zshenv
+	@[ ! -e $(DESTINATION)/.zshenv ] && ln -s $(DESTINATION)/.zsh/.zshenv $(DESTINATION)/.zshenv
 
 uninstall-zsh:
 	@mv $(DESTINATION)/.zsh $(DESTINATION)/.cleanup/
