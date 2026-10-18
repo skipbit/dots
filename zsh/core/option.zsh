@@ -45,7 +45,7 @@ setopt brace_ccl
 # シンボリックリンクは実態を追うようになる
 setopt chase_links
 
-# コマンド名が不正な時修正す驍ゥたずねる
+# コマンド名が不正な時修正するかたずねる
 setopt correct
 
 # =command を command のパス名に展開する
