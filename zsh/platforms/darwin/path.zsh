@@ -1,5 +1,5 @@
 
-# Evaluate path_helper (prevent /etc/zprofile in 10.11/elcapitan and later)
+# Evaluate path_helper (/etc/zprofile を読まない非ログインのシェルのため)
 [ -x /usr/libexec/path_helper ] && eval `/usr/libexec/path_helper -s`
 
 # Developer Tools
