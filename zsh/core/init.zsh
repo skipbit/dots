@@ -8,13 +8,14 @@ function zspecload() {
 		[[ $PS1 != "" && $TTY != "" ]] && echo "[33m*****  Loading ${CORE}[m" > $TTY
 	fi
 	
-	local OSSPEC=${ZDOTDIR}/platforms/`uname | tr '[:upper:]' '[:lower:]'`/${NAME}.zsh
+	#! OSTYPE (darwin26.0, linux-gnu) から darwin, linux を取り出す.
+	local OSSPEC=${ZDOTDIR}/platforms/${OSTYPE%%[0-9-]*}/${NAME}.zsh
 	if [ -f ${OSSPEC} ]; then
 		source ${OSSPEC}
 		[[ $PS1 != "" && $TTY != "" ]] && echo "[32m*****  Loading ${OSSPEC}[m" > $TTY
 	fi
 
-	local HOSTSPEC=${ZDOTDIR}/hosts/`hostname -s`/${NAME}.zsh
+	local HOSTSPEC=${ZDOTDIR}/hosts/${HOST%%.*}/${NAME}.zsh
 	if [ -f ${HOSTSPEC} ]; then
 		source ${HOSTSPEC}
 		[[ $PS1 != "" && $TTY != "" ]] && echo "[34m*****  Loading ${HOSTSPEC}[m" > $TTY

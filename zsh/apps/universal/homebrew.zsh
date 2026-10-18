@@ -1,9 +1,7 @@
 
 if type brew > /dev/null 2>&1; then
-    export HOMEBREW_PREFIX="$(brew --prefix)"
-
     cppflags=(); ldflags=()
-    for p in $(ls ${HOMEBREW_PREFIX}/Cellar); do
+    for p in ${HOMEBREW_PREFIX}/Cellar/*(N:t); do
         formula="${HOMEBREW_PREFIX}/opt/${p}/.brew/${p}.rb"
         # path, pkg_config_path
         if [ -f "${formula}" ] && [[ "$(<${formula})" == *keg_only* ]]; then
