@@ -13,3 +13,7 @@ else
     : no ssh-agent
 fi
 
+if [ -S "${SSH_AUTH_SOCK:-}" ]; then
+    mkdir -p "${HOME}/.ssh/agent" && chmod 700 "${HOME}/.ssh/agent"
+    ln -f "$(readlink -f "${SSH_AUTH_SOCK}")" "${HOME}/.ssh/agent/sock" 2>/dev/null
+fi
