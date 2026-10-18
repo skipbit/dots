@@ -104,6 +104,21 @@ return {
             })
 
             require('copilot_cmp').setup({})
+
+            -- copilot-cmp still calls client.is_stopped() with dot syntax, which nvim
+            -- deprecated in 0.11 and removes in 0.13. upstream is unmaintained, so
+            -- override is_available on the module table (instances index into it).
+            -- also fixes `not self.client.name == "copilot"`, which never evaluates true.
+            local copilot_source = require('copilot_cmp.source')
+            copilot_source.is_available = function (self)
+                if self.client:is_stopped() or self.client.name ~= 'copilot' then
+                    return false
+                end
+                return next(vim.lsp.get_clients({
+                    bufnr = vim.api.nvim_get_current_buf(),
+                    id = self.client.id,
+                })) ~= nil
+            end
         end
     },
 }
