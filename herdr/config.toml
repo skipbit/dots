@@ -32,10 +32,14 @@ auto_switch = false                    # 既定: false (設定画面が書き込
 
 [theme.custom]
 # ベーステーマの色トークンを個別に上書きする。既定はいずれも未設定 (テーマの値のまま)。
-# accent = pane の分割線 (フォーカスしている pane に接する線) と各種ハイライト。
+# accent = フォーカスしている pane の枠、ポップアップの枠、各種ハイライト (選択中のタブの背景など)。
 #   ※ [ui] の accent は別物で、分割線には効かない (実測)。
-# 他に sidebar_bg / active_row_bg / surface_dim / panel_bg / red / green / yellow。
-accent = "#8be9fd"                     # 既定: 未設定 (terminal テーマでは ANSI blue)
+# overlay0 = フォーカスしていない pane の枠とスクロールバー。
+# surface_dim = accent を背景にした文字 (選択中のタブなど)、サイドバーの区切り線。
+# 他に sidebar_bg / active_row_bg / panel_bg / red / green / yellow。
+# 色名の white と gray は ANSI 15 と 7 で、iTerm2 (と同じ配色の Ghostty) ではどちらも #ffffff になるので 16 進で書く。
+accent = "#999999"                     # 既定: 未設定 (terminal テーマでは ANSI blue)
+overlay0 = "#666666"                   # 既定: 未設定 (terminal テーマでは ANSI 7)
 # navigate モード (<prefix> w / g) で選択中の行。terminal テーマは既定だと
 # 実質透明で、選択が太字だけの差になって見えないので明示的に敷く。
 selection_bg = "#005f87"               # 既定: 未設定
@@ -130,6 +134,16 @@ agent_panel_sort = "spaces"
 # 背景 workspace のエージェントが止まったことに気付けるようにする。
 # "terminal" / "system" にすると OS の通知に飛ばせる。
 delivery = "herdr"                     # 既定: "off"
+
+[ui.sidebar.agents]
+# 並びは既定のまま。machine / tab / agent は overlay0 で描かれ、上の overlay0 では
+# 選択行の背景 (active_row_bg) に埋もれるので色を変える。白を dim にすると端末が
+# 背景と混ぜて描くので、黒地では控えめに、選択行では背景から浮いて見える。
+# pane の枠と補助の文字の色が分かれたら消す (herdr Discussion #3156)。
+rows = [                               # 既定: [["state_icon", "machine", "workspace", "tab"], ["agent"]]
+    ["state_icon", { token = "machine", fg = "#ffffff", dim = true }, "workspace", { token = "tab", fg = "#ffffff", dim = true }],
+    [{ token = "agent", fg = "#ffffff", dim = true }],
+]
 
 [update]
 # Homebrew で入れているので、herdr 自身の更新チェックはしない (brew upgrade herdr で上げる)。
