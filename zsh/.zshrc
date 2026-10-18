@@ -35,10 +35,10 @@ bindkey '^h' backward-kill-word
 # 単語ごと削除
 #bindkey '^[h' backward-kill-word       # ^W が標準
 
-type specload > /dev/null 2>&1 || source "${ZDOTDIR}/core/init.zsh"
+type zspecload > /dev/null 2>&1 || source "${ZDOTDIR}/core/init.zsh"
 
+zspecload option
 zspecload alias
-#zspecload option
 zspecload color
 zspecload compctl
 zspecload function

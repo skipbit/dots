@@ -31,7 +31,5 @@ if [ -f ${ZDOTDIR}/core/init.zsh ]; then
 	source ${ZDOTDIR}/core/init.zsh
 	zspecload path
 	zspecload env
-
-	zspecload option
 fi
 
