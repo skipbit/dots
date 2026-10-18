@@ -10,6 +10,7 @@ install:
 	@make install-tmux
 	@make install-nix
 	@make install-wezterm
+	@make install-ghostty
 	@make install-herdr
 	@make install-fzf-herdr
 
@@ -22,6 +23,7 @@ clean:
 	@make uninstall-tmux
 	@make uninstall-nix
 	@make uninstall-wezterm
+	@make uninstall-ghostty
 	@make uninstall-herdr
 	@make uninstall-fzf-herdr
 
@@ -84,6 +86,12 @@ install-wezterm:
 
 uninstall-wezterm:
 	@mv $(DESTINATION)/.config/wezterm $(DESTINATION)/.cleanup/
+
+install-ghostty:
+	@ln -s $(SOURCE)/ghostty $(DESTINATION)/.config/ghostty
+
+uninstall-ghostty:
+	@mv $(DESTINATION)/.config/ghostty $(DESTINATION)/.cleanup/
 
 install-herdr:
 	@mkdir -p $(DESTINATION)/.config/herdr

@@ -1,0 +1,97 @@
+# Ghostty <https://ghostty.org/docs/config>
+#
+# 既定値の全文は `ghostty +show-config --default --docs` で出る。ここに書くのは
+# iTerm2 で使っていた Default プロファイルを持ち越すための差分が中心で、
+# 書かなかった項目は Ghostty の既定に追随させる。
+# 「既定:」は ghostty +show-config --default の値。
+#
+# 行末コメントは書けない。`font-family = Monaco # ...` はエラーにならず
+# コメントまで含めてフォント名として読まれるので、コメントは必ず独立した行に書く。
+#
+# 検証 ... ghostty +validate-config
+# 反映 ... cmd+shift+,   (再起動は不要。shell-integration-features だけは
+#                         シェル起動時に渡るので、新しいタブ / ウィンドウから効く)
+#
+# macOS では ~/Library/Application Support/com.mitchellh.ghostty/config.ghostty
+# も読まれ、こちらより後に読まれて優先される。そこには何も書かない。
+
+# --- font ---
+# iTerm2: Normal Font = Monaco 12 / Non-ASCII Font = DroidSansMNF 12。
+# Ghostty に「非 ASCII だけ別フォント」はないので、Monaco に無い字形を
+# 次の family に落とす形で近づける (日本語はその先の OS のフォールバック)。
+# 既定: 未設定 (内蔵の JetBrains Mono) / 13
+font-family = Monaco
+font-family = DroidSansM Nerd Font Mono
+font-size = 12
+
+# --- colors ---
+# iTerm2 の Default プロファイルのパレットをそのまま持ち越す。
+# iTerm2 側で Display P3 指定だった 1 2 3 6 は sRGB に換算してある
+# (いずれも sRGB の色域外なので端で丸めた値。元の P3 値はコメント)。
+# 既定: background #282c34 / foreground #ffffff (同じだが background と対で明示)
+background = #000000
+foreground = #ffffff
+palette = 0=#14191e
+# P3 #ff6041
+palette = 1=#ff5030
+# P3 #9eff80
+palette = 2=#7aff6d
+# P3 #d4d132
+palette = 3=#d5d100
+palette = 4=#2744c7
+palette = 5=#c040be
+# P3 #1de6ec
+palette = 6=#00eaee
+palette = 7=#ffffff
+palette = 8=#686868
+palette = 9=#dd7975
+palette = 10=#58e790
+palette = 11=#ece100
+palette = 12=#a7abf2
+palette = 13=#e17ee1
+palette = 14=#60fdff
+palette = 15=#ffffff
+# 既定: 未設定 (前景と背景の反転)
+selection-background = #b3d7ff
+selection-foreground = #000000
+# macos options
+background-opacity = 0.95
+background-blur-radius = 20
+
+# --- keyboard ---
+# iTerm2: Option Key Sends = Esc+ (左右とも)。
+# 既定は US 配列のときだけ true 扱いで、JIS 配列では false になるので明示する。
+macos-option-as-alt = true
+
+# Ghostty の既定は alt+←/→ を ESC b / ESC f (単語移動) に割り当てていて、
+# nvim の DAP キーマップ <M-Left> / <M-Right> に届かなくなる。
+# 外して iTerm2 と同じく修飾付きの矢印シーケンスをそのまま流す。
+keybind = alt+arrow_left=unbind
+keybind = alt+arrow_right=unbind
+
+# --- mouse / clipboard ---
+# iTerm2: 選択したら即システムのクリップボードへ。
+# 既定の true は macOS だと Ghostty 内部の選択バッファ止まりで、cmd+v には乗らない。
+# 既定: true
+copy-on-select = clipboard
+
+# iTerm2 と同じ。Ghostty 自身の split に効く (tmux / herdr の pane には関係ない)。
+# 既定: false
+focus-follows-mouse = true
+
+# --- window ---
+# iTerm2: 閉じる / 終了時に確認しない。中身は tmux / herdr が持っているので
+# ウィンドウを閉じても失うのはクライアントだけ。
+# 既定: true
+confirm-close-surface = false
+
+# --- shell integration ---
+# no-cursor ... プロンプトでカーソルをバーに変える機能を切る。iTerm2 と同じ点滅ブロックのままにする。
+# ssh-env   ... ssh 先へは TERM=xterm-256color で入る。ssh 先に xterm-ghostty の
+#               terminfo が無いと BS や色が崩れるため。tmux の中は tmux が
+#               TERM=xterm-256color にするので関係ない。
+#               ssh 先に terminfo を自動で入れる ssh-terminfo は使わない
+#               (リモートの ~/.terminfo に書き込むので)。
+# 書かなかった機能は既定のまま (title, path は有効 / sudo は無効)。
+# 既定: cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,path
+shell-integration-features = no-cursor,ssh-env
