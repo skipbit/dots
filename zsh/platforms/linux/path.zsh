@@ -12,3 +12,6 @@ if type brew > /dev/null 2>&1; then
     [ -z "${HOMEBREW_PREFIX}" ] && export HOMEBREW_PREFIX="$(brew --prefix)"
     fpath=("${HOMEBREW_PREFIX}/share/zsh/site-functions"(N-/) $fpath)
 fi
+
+# pipx, uv tool
+path=($path "${HOME}/.local/bin"(N-/))
