@@ -11,6 +11,7 @@ install:
 	@make install-nix
 	@make install-wezterm
 	@make install-herdr
+	@make install-fzf-herdr
 
 clean:
 	@mkdir $(DESTINATION)/.cleanup
@@ -22,6 +23,7 @@ clean:
 	@make uninstall-nix
 	@make uninstall-wezterm
 	@make uninstall-herdr
+	@make uninstall-fzf-herdr
 
 install-zsh:
 	@[ ! -e $(DESTINATION)/.zsh ] && ln -s $(SOURCE)/zsh $(DESTINATION)/.zsh
@@ -89,3 +91,13 @@ install-herdr:
 
 uninstall-herdr:
 	@mv $(DESTINATION)/.config/herdr/config.toml $(DESTINATION)/.cleanup/
+
+# herdr のないホストでは何もしない。
+install-fzf-herdr:
+	@if command -v herdr > /dev/null 2>&1; then herdr plugin install --yes skipbit/fzf-herdr; fi
+
+uninstall-fzf-herdr:
+	@if command -v herdr > /dev/null 2>&1; then \
+		herdr plugin uninstall skipbit.fzf-herdr; \
+		mv $${XDG_DATA_HOME:-$(DESTINATION)/.local/share}/fzf-herdr $(DESTINATION)/.cleanup/; \
+	fi
