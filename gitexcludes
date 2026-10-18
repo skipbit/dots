@@ -74,3 +74,4 @@ ui_*.h
 # QtCreator
 *.autosave
 
+**/.claude/settings.local.json
