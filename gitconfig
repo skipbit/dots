@@ -1,6 +1,6 @@
 
 [core]
-	excludesfile = /Users/endo/.gitexcludes
+	excludesfile = ~/.gitexcludes
 	quotepath = false
 
 [init]
