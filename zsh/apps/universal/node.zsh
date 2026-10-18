@@ -7,5 +7,5 @@ elif type volta > /dev/null 2>&1; then
     path=($path "${VOLTA_HOME}/bin")
 elif type n > /dev/null 2>&1; then
     export N_PREFIX="${HOME}/.n"
-    path=($path "${N_PREFIX}/bin")
+    path=("${N_PREFIX}/bin" $path)
 fi
